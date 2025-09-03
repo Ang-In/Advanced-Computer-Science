@@ -1,25 +1,24 @@
 // Solution: Unit 0 Exercises
 public class Unit0Exercises {
 
-
     public static void main(String[] args) {
         Unit0Exercises obj = new Unit0Exercises();
         System.out.println();
 
         // testing sleepIn() method
         System.out.println(obj.sleepIn(false, false)); // output: true
-        // sleepIn(true, false) -> true
-        // sleepIn(false, true) -> true
+        System.out.println(obj.sleepIn(true, false)); // -> false
+        System.out.println(obj.sleepIn(false, true)); // -> true
 
         // testing diff21() method
         System.out.println(obj.diff21(19)); // output: 2
-        // diff21(10) -> 11
-        // diff21(21) -> 0
+        System.out.println(obj.diff21(10)); // -> 11
+        System.out.println(obj.diff21(21)); // -> 0
 
         // testing flooringCalculator() method
         System.out.println(obj.flooringCalculator(500, 2.5)); // output: 1250.0
-        // flooringCalculator(0, 3.0) -> 0.0
-        // flooringCalculator(100, -1.5) -> 0.0
+        System.out.println(obj.flooringCalculator(0, 3.0)); // -> 0.0
+        System.out.println(obj.flooringCalculator(100, -1.5)); // -> 0.0
 
     }
 
@@ -34,19 +33,27 @@ public class Unit0Exercises {
     }
 
     public int diff21(int n) {
-        int sol = n - 21;
+        int sol;
 
-        // if()
+        if (n > 21) {
+            sol = 2 * (n - 21);
+        } else if (n > 0 & n <= 21) {
+            sol = 21 - n;
+        } else if (n <= 0 && n > -21) {
+            n = -n;
+            sol = 21 - n;
+        } else {
+            n = -n;
+            sol = n - 21;
+        }
 
-
-        return 0;
+        return sol;
     }
 
     public double flooringCalculator(int sqft, double pricePerSqft) {
-        double sqftDouble = (double) sqft;
 
-        if (sqftDouble > 0 || pricePerSqft > 0) {
-            return sqftDouble * pricePerSqft;
+        if (sqft > 0 && pricePerSqft > 0) {
+            return sqft * pricePerSqft;
         }
 
         return 0.0;
