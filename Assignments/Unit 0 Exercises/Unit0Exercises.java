@@ -23,9 +23,14 @@ public class Unit0Exercises {
     }
 
     public boolean sleepIn(boolean weekday, boolean vacation) {
-        if (vacation) {
-            return true;
-        } else if (!weekday) {
+
+        // if-elif solution
+        /*
+         * if (vacation) { return true; } else if (!weekday) { return true; }
+         */
+
+        // one-if solution
+        if (vacation || !weekday) {
             return true;
         }
 
@@ -35,16 +40,17 @@ public class Unit0Exercises {
     public int diff21(int n) {
         int sol;
 
+        // if case by case solution
+        /*
+         * if (n > 21) { sol = 2 * (n - 21); } else if (n > 0 & n <= 21) { sol = 21 - n; } else if
+         * (n <= 0 && n > -21) { n = -n; sol = 21 - n; } else { n = -n; sol = n - 21; }
+         */
+
+        // Math.abs solution
         if (n > 21) {
-            sol = 2 * (n - 21);
-        } else if (n > 0 & n <= 21) {
-            sol = 21 - n;
-        } else if (n <= 0 && n > -21) {
-            n = -n;
-            sol = 21 - n;
+            sol = 2 * Math.abs(n - 21);
         } else {
-            n = -n;
-            sol = n - 21;
+            sol = Math.abs(n - 21);
         }
 
         return sol;

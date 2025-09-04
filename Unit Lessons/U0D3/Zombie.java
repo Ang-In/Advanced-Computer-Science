@@ -21,9 +21,13 @@ public class Zombie {
 
         Zombie brian = new Zombie();
 
-        brian.growl();
         System.out.println(brian.growl());
 
+        System.out.println(brian.humansEaten);
+        brian.eatHuman();
+        System.out.println(brian.humansEaten);
+        brian.feast(14);
+        System.out.println(brian.humansEaten);
 
     }
 
@@ -40,5 +44,11 @@ public class Zombie {
         return humansEaten;
     }
 
-    // Challenge Completed
+    public void eatHuman() {
+        humansEaten++;
+    }
+
+    public void feast(int humanCount) {
+        humansEaten += humanCount;
+    }
 }
