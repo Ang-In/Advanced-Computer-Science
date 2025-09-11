@@ -18,10 +18,11 @@ public class RectangleTester {
         System.out.println(standard.toString());
 
         // equals
-        System.out.println(custom.equals(standard));
+        System.out.println(
+                "Are the rectangles custom and standard equal? " + custom.equals(standard));
 
         // diagonal
-        System.out.println(custom.calculateDiagonal());
-        System.out.println(standard.calculateDiagonal());
+        System.out.println("Diagonal of Rectangle Custom: " + custom.calculateDiagonal());
+        System.out.println("Diagonal of Rectangle Standard: " + standard.calculateDiagonal());
     }
 }
