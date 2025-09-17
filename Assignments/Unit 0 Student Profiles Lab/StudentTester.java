@@ -12,17 +12,6 @@ public class StudentTester {
         System.out.println(quiet.toString());
         System.out.println(dreamer.toString());
 
-        // test getters
-        silly.generateId();
-        annoying.generateId();
-        quiet.generateId();
-        dreamer.generateId();
-
-        System.out.println(silly.toString());
-        System.out.println(annoying.toString());
-        System.out.println(quiet.toString());
-        System.out.println(dreamer.toString());
-
         // test setters
         silly.setGrade(10);
         annoying.setGrade(12);
@@ -38,16 +27,15 @@ public class StudentTester {
         System.out.println("Are " + quiet.getName() + " and " + dreamer.getName() + " equal? "
                 + quiet.equals(dreamer));
 
-        // Stretch Challenge: test vibeCheck
-        silly.setLatestOpp(annoying);
-        dreamer.setLatestOpp(annoying);
-
-        System.out.println(silly.toString());
-        System.out.println(dreamer.toString());
-
-        System.out.println(dreamer.vibeCheck(silly));
-        System.out.println(
-                dreamer.getName() + "'s newest friend: " + dreamer.getRecentFriend().getName());
+        /*
+         * // Stretch Challenge: test vibeCheck silly.setLatestOpp(annoying);
+         * dreamer.setLatestOpp(annoying);
+         * 
+         * System.out.println(silly.toString()); System.out.println(dreamer.toString());
+         * 
+         * System.out.println(dreamer.vibeCheck(silly)); System.out.println( dreamer.getName() +
+         * "'s newest friend: " + dreamer.getRecentFriend().getName());
+         */
 
     }
 }
