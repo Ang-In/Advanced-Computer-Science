@@ -14,7 +14,7 @@ public class Dog {
         this.ownerName = ownerName;
         this.age = age;
         this.dogId = dogId;
-        this.dogChar = generateDogChar();
+        this.dogChar = Dog.generateDogChar(dogId);
         this.dogTag = generateDogTag();
         this.stillInFacility = true;
     }
@@ -24,13 +24,13 @@ public class Dog {
         this.ownerName = "Chrissy";
         this.age = 1;
         this.dogId = 100;
-        this.dogChar = generateDogChar();
+        this.dogChar = Dog.generateDogChar(dogId);
         this.dogTag = generateDogTag();
         this.stillInFacility = true;
     }
 
     // methods
-    public char generateDogChar() {
+    public static char generateDogChar(int dogId) {
         int conversion = dogId;
         int onesDigit = conversion % 10;
         conversion /= 10;
@@ -42,6 +42,21 @@ public class Dog {
 
     public String generateDogTag() {
         return "" + dogId + dogChar;
+    }
+
+    public static String pickup(Dog dog, String personName) {
+        if (dog.ownerName.equals(personName)) {
+            dog.stillInFacility = false;
+            return dog.name + " has been picked up by their owner " + personName + ".";
+        } else {
+            return "For " + dog.name + "'s safety, they'll remain in our care until "
+                    + dog.ownerName + " comes to pick them up. Apologies, " + personName + ".";
+        }
+    }
+
+    public static void checkIn(Dog dog, String personName) {
+        dog.stillInFacility = true;
+        dog.ownerName = personName;
     }
 
     public String toString() {
