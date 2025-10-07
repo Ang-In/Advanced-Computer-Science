@@ -14,8 +14,8 @@ public class Dog {
         this.ownerName = ownerName;
         this.age = age;
         this.dogId = dogId;
-        this.dogChar = Dog.generateDogChar(dogId);
-        this.dogTag = generateDogTag();
+        this.dogChar = PawesomeUtils.generateDogChar(dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(dogId, dogChar);
         this.stillInFacility = true;
     }
 
@@ -24,40 +24,13 @@ public class Dog {
         this.ownerName = "Chrissy";
         this.age = 1;
         this.dogId = 100;
-        this.dogChar = Dog.generateDogChar(dogId);
-        this.dogTag = generateDogTag();
+        this.dogChar = PawesomeUtils.generateDogChar(dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(dogId, dogChar);
         this.stillInFacility = true;
     }
 
     // methods
-    public static char generateDogChar(int dogId) {
-        int conversion = dogId;
-        int onesDigit = conversion % 10;
-        conversion /= 10;
-        int tensDigit = conversion % 10;
-        int hundredsDigit = conversion /= 10;
 
-        return (char) ('F' + ((onesDigit + tensDigit + hundredsDigit) % 10));
-    }
-
-    public String generateDogTag() {
-        return "" + dogId + dogChar;
-    }
-
-    public static String pickup(Dog dog, String personName) {
-        if (dog.ownerName.equals(personName)) {
-            dog.stillInFacility = false;
-            return dog.name + " has been picked up by their owner " + personName + ".";
-        } else {
-            return "For " + dog.name + "'s safety, they'll remain in our care until "
-                    + dog.ownerName + " comes to pick them up. Apologies, " + personName + ".";
-        }
-    }
-
-    public static void checkIn(Dog dog, String personName) {
-        dog.stillInFacility = true;
-        dog.ownerName = personName;
-    }
 
     public String toString() {
         if (stillInFacility) {
