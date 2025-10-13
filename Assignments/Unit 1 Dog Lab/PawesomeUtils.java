@@ -26,9 +26,14 @@ public class PawesomeUtils {
 
     public static boolean validateDogTag(Dog dog) {
         int dogId = dog.getDogId();
-        dogId = validateDogId(dogId);
-        char dogChar = generateDogChar(dogId);
-        String newDogTag = generateDogTag(dogId, dogChar);
+        int newDogId = validateDogId(dogId);
+        char newDogChar = generateDogChar(newDogId);
+        String newDogTag = generateDogTag(newDogId, newDogChar);
+
+        if (dog.getDogTag().indexOf(dog.getDogChar()) == -1) {
+            dog.setDogTag("" + dog.getDogId() + dog.getDogChar());
+        }
+
         if (dog.getDogTag().equals(newDogTag)) {
             return true;
         } else {
@@ -47,7 +52,36 @@ public class PawesomeUtils {
     }
 
     public static void checkIn(Dog dog, String personName) {
-        dog.setStillInFacility(true);
-        dog.setOwnerName(personName);
+        if (!validateDogTag(dog)) {
+            System.out
+                    .println("This dog's tag is invalid! " + dog.getName() + "'s a counterfit dog! "
+                            + "Unfortunately, counterfit dogs cannot be checked in. Apologies, "
+                            + personName + ".");
+        } else {
+            dog.setStillInFacility(true);
+            dog.setOwnerName(personName);
+            System.out.println(
+                    dog.getName() + " has been checked in under your name, " + personName + ".");
+        }
+    }
+
+    public static int convertAgeToHumanAge(Dog dog) {
+        if (dog.getAge() == 1) {
+            return 15;
+        } else if (dog.getAge() == 2) {
+            return 24;
+        } else {
+            return 24 + ((dog.getAge() - 2) * 5);
+        }
+    }
+
+    public static int convertAgeToDogYears(int humanYears) {
+        if (humanYears <= 15) {
+            return 1;
+        } else if (humanYears > 15 && humanYears <= 24) {
+            return 2;
+        } else {
+            return ((humanYears - 24) / 5) + 2;
+        }
     }
 }

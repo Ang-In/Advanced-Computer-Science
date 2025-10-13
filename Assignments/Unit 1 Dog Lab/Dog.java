@@ -13,9 +13,9 @@ public class Dog {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
-        this.dogId = dogId;
-        this.dogChar = PawesomeUtils.generateDogChar(dogId);
-        this.dogTag = PawesomeUtils.generateDogTag(dogId, dogChar);
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
         this.stillInFacility = true;
     }
 
@@ -27,30 +27,6 @@ public class Dog {
         this.dogChar = PawesomeUtils.generateDogChar(dogId);
         this.dogTag = PawesomeUtils.generateDogTag(dogId, dogChar);
         this.stillInFacility = true;
-    }
-
-    // methods
-
-
-    public String toString() {
-        if (stillInFacility) {
-            return name + " is a good dog. They are " + age + " years old and belong to "
-                    + ownerName
-                    + ". They are currently in our facility. For employee use only: DogTag is "
-                    + dogTag + ".";
-        } else {
-            return name + " is a good dog. They are " + age + " years old and belong to "
-                    + ownerName
-                    + ". They are not currently in our facility. For employee use only: DogTag is "
-                    + dogTag + ".";
-        }
-    }
-
-    public boolean equals(Dog other) {
-        return this.name.equals(other.name) && this.ownerName.equals(other.ownerName)
-                && this.age == other.age && this.dogId == other.dogId
-                && this.dogChar == other.dogChar && this.dogTag.equals(other.dogTag)
-                && this.stillInFacility == other.stillInFacility;
     }
 
     // getters and setters
@@ -83,7 +59,9 @@ public class Dog {
     }
 
     public void setDogId(int dogId) {
-        this.dogId = dogId;
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
     }
 
     public char getDogChar() {
@@ -108,5 +86,29 @@ public class Dog {
 
     public void setStillInFacility(boolean stillInFacility) {
         this.stillInFacility = stillInFacility;
+    }
+
+    // methods
+
+
+    public String toString() {
+        if (stillInFacility) {
+            return name + " is a good dog. They are " + age + " years old and belong to "
+                    + ownerName
+                    + ". They are currently in our facility. For employee use only: DogTag is "
+                    + dogTag + ".";
+        } else {
+            return name + " is a good dog. They are " + age + " years old and belong to "
+                    + ownerName
+                    + ". They are not currently in our facility. For employee use only: DogTag is "
+                    + dogTag + ".";
+        }
+    }
+
+    public boolean equals(Dog other) {
+        return this.name.equals(other.name) && this.ownerName.equals(other.ownerName)
+                && this.age == other.age && this.dogId == other.dogId
+                && this.dogChar == other.dogChar && this.dogTag.equals(other.dogTag)
+                && this.stillInFacility == other.stillInFacility;
     }
 }
