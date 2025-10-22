@@ -100,36 +100,43 @@ public class TriangleLoops {
     // to-do: implement createAlphabetTriangle
     public static String createAlphabetTriangle(int numberOfRows) {
         String triangle = "";
+        String prevRow = " ";
         int convertToChar = 64;
+        boolean firstLayer = true;
 
         if (numberOfRows > 26) {
             numberOfRows = 26;
         }
 
+        // building triangle loop
         for (int i = 1; i <= numberOfRows; i++) {
-            boolean lineSpaced = false;
-            int j = numberOfRows - 1;
+            String currentRow = "";
 
             // adding spaces
-            while (j > 0 && lineSpaced == false) {
-                triangle += " ";
-                lineSpaced = !lineSpaced;
+            for (int j = numberOfRows - i; j > 0; j--) {
+                currentRow += " ";
             }
 
             // adding chars to the triangle
-            for (int k = 0; k < i; k++) {
-                if (i == 1) {
-                    triangle += (char) (i + convertToChar);
-                } else {
-                    String prevLayer = triangle.substring(-1 - ((i - 1) * 2), -1);
-                    String firstHalf = prevLayer.substring(0, prevLayer.length() / 2);
-                }
 
-                triangle += (char) (i + convertToChar);
-                triangle += reverse;
-                reverse = ((char) (i + convertToChar)) + reverse;
+            if (firstLayer) {
+                currentRow += (char) (i + convertToChar); // adds 'A'
+                firstLayer = false;
+            } else {
+                String prevLayer = "";
+                // System.out.println(prevRow.indexOf("A"));
+                prevLayer = prevRow.substring(prevRow.indexOf("A"));
+                String firstHalf = prevLayer.substring(0, (prevLayer.length() / 2) + 1);
+                String secondHalf = prevLayer.substring(prevLayer.length() / 2);
+                currentRow += firstHalf;
+                currentRow += (char) (i + convertToChar);
+                currentRow += secondHalf;
             }
 
+            prevRow = currentRow;
+            triangle += currentRow;
+
+            // adds a new line
             if (i != numberOfRows) {
                 triangle += "\n";
             }
