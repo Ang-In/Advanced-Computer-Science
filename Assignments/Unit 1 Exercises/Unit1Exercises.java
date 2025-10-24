@@ -27,7 +27,7 @@ public class Unit1Exercises {
      * "<<WooHoo>>" makeOutWord("[[]]", "word") -> "[[word]]"
      */
     public static String makeOutWord(String out, String word) {
-        return out.substring(0, out.length() / 2) + word + out.substring((out.length() / 2) + 1);
+        return out.substring(0, out.length() / 2) + word + out.substring((out.length() / 2));
     }
 
     // method: withoutEnd
@@ -87,7 +87,8 @@ public class Unit1Exercises {
      * middleThree("solving") -> "lvi"
      */
     public static String middleThree(String str) {
-        return "";
+        int remove = (str.length() - 3) / 2;
+        return str.substring(remove, str.length() - remove);
     }
 
     // method: withoutEnd2
@@ -100,7 +101,11 @@ public class Unit1Exercises {
      * ""
      */
     public static String withoutEnd2(String str) {
-        return "";
+        if (str.length() < 2) {
+            return "";
+        } else {
+            return str.substring(1, str.length() - 1);
+        }
     }
 
     // method: stringEnds
@@ -113,7 +118,7 @@ public class Unit1Exercises {
      * stringEnds("Chocolate", 1) -> "Ce"
      */
     public static String stringEnds(String str, int n) {
-        return "";
+        return str.substring(0, n) + str.substring(str.length() - n);
     }
 
     // method: hasBad
@@ -125,6 +130,9 @@ public class Unit1Exercises {
      * Tester examples: hasBad("badxx") -> true hasBad("xbadxx") -> true hasBad("xxbadxx") -> false
      */
     public static boolean hasBad(String str) {
+        if (str.substring(0, 3).equals("bad") || str.substring(1, 4).equals("bad")) {
+            return true;
+        }
         return false;
     }
 
@@ -137,7 +145,21 @@ public class Unit1Exercises {
      * Tester examples: countVowels("Hello") -> 2 countVowels("abc") -> 1 countVowels("") -> 0
      */
     public static int countVowels(String input) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'a' || input.charAt(i) == 'A') {
+                count++;
+            } else if (input.charAt(i) == 'e' || input.charAt(i) == 'E') {
+                count++;
+            } else if (input.charAt(i) == 'i' || input.charAt(i) == 'I') {
+                count++;
+            } else if (input.charAt(i) == 'o' || input.charAt(i) == 'O') {
+                count++;
+            } else if (input.charAt(i) == 'u' || input.charAt(i) == 'U') {
+                count++;
+            }
+        }
+        return count;
     }
 
     // method: countCode
@@ -150,7 +172,13 @@ public class Unit1Exercises {
      * countCode("cozexxcope") -> 2
      */
     public static int countCode(String str) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < str.length() - 3; i++) {
+            if (str.charAt(i) == 'c' && str.charAt(i + 1) == 'o' && str.charAt(i + 3) == 'e') {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
