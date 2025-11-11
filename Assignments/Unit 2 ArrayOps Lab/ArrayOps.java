@@ -8,7 +8,6 @@ public class ArrayOps {
      * @return The constructed string representation of the array.
      */
     public static String printStringArray(String[] array) {
-        // to-do: come back to null-proof this method
         String arrayDesc = "[";
         for (int i = 0; i < array.length; i++) {
             if (i == array.length - 1) {
@@ -54,8 +53,11 @@ public class ArrayOps {
      */
     public static int findMax(int[] array) {
         int largest = Integer.MIN_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            largest = Math.max(largest, array[i]);
+
+        if (array != null) {
+            for (int i = 0; i < array.length; i++) {
+                largest = Math.max(largest, array[i]);
+            }
         }
 
         return largest;
@@ -69,10 +71,11 @@ public class ArrayOps {
      * @return The longest String in the array.
      */
     public static String findLongestString(String[] array) {
-        // to-do: come back to null-proof this method
-
         String longest = "";
         for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                continue;
+            }
             if (longest.length() < array[i].length()) {
                 longest = array[i];
             }
@@ -97,6 +100,10 @@ public class ArrayOps {
                 continue;
             }
             avg += str.length();
+        }
+
+        if (skipped == array.length) {
+            return 0.0;
         }
 
         avg /= (array.length - skipped);
@@ -141,19 +148,21 @@ public class ArrayOps {
      * @return The updated array
      */
     public static int[] removeIntAndScoot(int[] array, int index) {
-        int[] shiftedArray = new int[array.length];
+        if (array == null) {
+            return new int[0];
+        }
 
         for (int i = 0; i < array.length; i++) {
             if (i == (array.length - 1)) {
-                shiftedArray[i] = 0;
+                array[i] = 0;
             } else if (i >= index) {
-                shiftedArray[i] = array[i + 1];
+                array[i] = array[i + 1];
             } else {
-                shiftedArray[i] = array[i];
+                array[i] = array[i];
             }
 
         }
-        return shiftedArray;
+        return array;
     }
 
     /**
@@ -163,7 +172,21 @@ public class ArrayOps {
      * @return The resized array
      */
     public static int[] resizeIntArray(int[] array) {
-        return new int[0];
+        if (array == null) {
+            return new int[0];
+        }
+
+        int[] resizedArray = new int[2 * array.length];
+
+        for (int i = 0; i < resizedArray.length; i++) {
+            if (i >= array.length) {
+                resizedArray[i] = 0;
+            } else {
+                resizedArray[i] = array[i];
+            }
+        }
+
+        return resizedArray;
     }
 
     /**
@@ -176,7 +199,19 @@ public class ArrayOps {
      * @return The modified array with the number symbol and element number added to each String
      */
     public static String[] addNumToStringArray(String[] array) {
-        return new String[0];
+        if (array == null) {
+            return new String[0];
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                continue;
+            } else {
+                array[i] = "#" + i + " " + array[i];
+            }
+        }
+
+        return array;
     }
 
     /**

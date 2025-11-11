@@ -1,6 +1,7 @@
 public class ArrayOpsTester {
     public static void main(String[] args) {
 
+        // testing printStringArray()
         String[] stringArr1 = {"apple", "banana", "kiwi", "orange"};
         ArrayOps.printStringArray(stringArr1); // Output: [apple, banana, kiwi, orange]
 
@@ -10,11 +11,15 @@ public class ArrayOpsTester {
         String[] stringArr3 = {"red", "green", "blue", "yellow"};
         ArrayOps.printStringArray(stringArr3); // Output: [red, green, blue, yellow]
 
+        String[] stringArr4 = new String[4]; // null edge case
+        ArrayOps.printStringArray(stringArr4); // Output: [null, null, null, null]
+
         // Testing if two arrays are equal
         String arrayString1 = ArrayOps.printStringArray(stringArr1);
         String arrayString2 = ArrayOps.printStringArray(stringArr2);
         System.out.println("Are the arrays the same? " + arrayString1.equals(arrayString2));
 
+        // testing printIntegerArray()
         int[] intArr1 = {1, 2, 3, 4, 5};
         ArrayOps.printIntegerArray(intArr1); // Output: [1, 2, 3, 4, 5]
 
@@ -24,15 +29,40 @@ public class ArrayOpsTester {
         int[] intArr3 = {-1, -2, -3, -4, -5};
         ArrayOps.printIntegerArray(intArr3); // Output: [-1, -2, -3, -4, -5]
 
-        int[] intArr4 = {5, 10, 3, 8, 2};
-        System.out.println("Max: " + ArrayOps.findMax(intArr4)); // Output: Max: 10
+        int[] intArr4 = new int[5];
+        ArrayOps.printIntegerArray(intArr4); // Output: [0, 0, 0, 0, 0]
 
-        int[] intArr5 = {-1, -5, -3, -2, -8};
-        System.out.println("Max: " + ArrayOps.findMax(intArr5)); // Output: Max: -1
+        // testing findMax()
+        int[] intArr5 = {5, 10, 3, 8, 2};
+        System.out.println("Max: " + ArrayOps.findMax(intArr5)); // Output: Max: 10
 
-        int[] intArr6 = {100, 200, 300, 400, 500};
-        System.out.println("Max: " + ArrayOps.findMax(intArr6)); // Output: Max: 500
+        int[] intArr6 = {-1, -5, -3, -2, -8};
+        System.out.println("Max: " + ArrayOps.findMax(intArr6)); // Output: Max: -1
 
+        int[] intArr7 = {100, 200, 300, 400, 500};
+        System.out.println("Max: " + ArrayOps.findMax(intArr7)); // Output: Max: 500
+
+        int[] intArr8 = null;
+        System.out.println("Max: " + ArrayOps.findMax(intArr8)); // Output: Max: NaN
+
+        // testing findLongestString()
+        System.out
+                .println("Longest String in stringArr1: " + ArrayOps.findLongestString(stringArr1));
+        // Output: banana
+
+        System.out
+                .println("Longest String in stringArr2: " + ArrayOps.findLongestString(stringArr2));
+        // Output: elephant
+
+        System.out
+                .println("Longest String in stringArr3: " + ArrayOps.findLongestString(stringArr3));
+        // Output: yellow
+
+        System.out
+                .println("Longest String in stringArr4: " + ArrayOps.findLongestString(stringArr4));
+        // Output: an empty string (null edge case)
+
+        // testing averageStringLength()
         System.out.println("Average String Length: " + ArrayOps.averageStringLength(stringArr1));
         // Output: Average String Length: 5.25
 
@@ -42,6 +72,10 @@ public class ArrayOpsTester {
         System.out.println("Average String Length: " + ArrayOps.averageStringLength(stringArr3));
         // Output: Average String Length: 4.5
 
+        System.out.println("Average String Length: " + ArrayOps.averageStringLength(stringArr4));
+        // Output: Average String Length: 0 (null edge case)
+
+        // testing countLetterFrequencies()
         String input1 = "Hello, World!";
         int[] frequencies1 = ArrayOps.countLetterFrequencies(input1);
         ArrayOps.printIntegerArray(frequencies1);
@@ -64,6 +98,17 @@ public class ArrayOpsTester {
         // Output: [1, 1, 1, 1, 3, 1, 1, 2, 1, 1, 1, 1, 1, 1, 4, 1, 1, 2, 1, 2, 2, 1, 1,
         // 1, 1, 1]
 
+        String input4 = ""; // blank string edge case
+        int[] frequencies4 = ArrayOps.countLetterFrequencies(input4);
+        ArrayOps.printIntegerArray(frequencies4);
+        // Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        String input5 = null; // null edge case
+        int[] frequencies5 = ArrayOps.countLetterFrequencies(input5);
+        ArrayOps.printIntegerArray(frequencies5);
+        // Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        // testing removeIntAndScoot()
         intArr1 = new int[] {1, 2, 3, 4, 5};
         int removedIndex1 = 2;
         int[] arr1Update = ArrayOps.removeIntAndScoot(intArr1, removedIndex1);
@@ -82,6 +127,13 @@ public class ArrayOpsTester {
         ArrayOps.printIntegerArray(arr3Update);
         // Output: [200, 300, 400, 0]
 
+        intArr4 = null; // null edge case
+        int removedIndex4 = 0;
+        int[] arr4Update = ArrayOps.removeIntAndScoot(intArr4, removedIndex4);
+        ArrayOps.printIntegerArray(arr4Update);
+        // Output: [0, 0, 0, 0]
+
+        // testing resizeIntArray()
         int[] arr1 = {1, 2, 3, 4, 5};
         int[] resizedArr1 = ArrayOps.resizeIntArray(arr1);
         ArrayOps.printIntegerArray(resizedArr1);
@@ -97,6 +149,12 @@ public class ArrayOpsTester {
         ArrayOps.printIntegerArray(resizedArr3);
         // Output: [100, 0]
 
+        int[] arr4 = null; // null edge case
+        int[] resizedArr4 = ArrayOps.resizeIntArray(arr4);
+        ArrayOps.printIntegerArray(resizedArr4);
+        // Output: []
+
+        // testing addNumToStringArray()
         String[] arra1 = {"Hello", "my", "name", "is", "Larry"};
         String[] modifiedArr1 = ArrayOps.addNumToStringArray(arra1);
         ArrayOps.printStringArray(modifiedArr1);
@@ -112,6 +170,18 @@ public class ArrayOpsTester {
         ArrayOps.printStringArray(modifiedArr3);
         // Output: [#0 Java, #1 programming, #2 is, #3 fun]
 
+        String[] arra4 = null; // null edge case
+        String[] modifiedArr4 = ArrayOps.addNumToStringArray(arra4);
+        ArrayOps.printStringArray(modifiedArr4);
+        // Output: []
+
+        String[] arra5 = null; // null element edge case
+        String[] modifiedArr5 = ArrayOps.addNumToStringArray(arra5);
+        ArrayOps.printStringArray(modifiedArr5);
+        // Output: [#0 This, #1 is, null, #3 test]
+
+
+        // testing reverseIntArray()
         int[] array1 = {1, 2, 3, 4, 5};
         int[] reversedArr1 = ArrayOps.reverseIntArray(array1);
         ArrayOps.printIntegerArray(reversedArr1);
