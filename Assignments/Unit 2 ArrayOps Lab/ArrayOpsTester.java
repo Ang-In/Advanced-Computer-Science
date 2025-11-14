@@ -175,11 +175,10 @@ public class ArrayOpsTester {
         ArrayOps.printStringArray(modifiedArr4);
         // Output: []
 
-        String[] arra5 = null; // null element edge case
+        String[] arra5 = {"This", "is", null, "test"}; // null element edge case
         String[] modifiedArr5 = ArrayOps.addNumToStringArray(arra5);
         ArrayOps.printStringArray(modifiedArr5);
         // Output: [#0 This, #1 is, null, #3 test]
-
 
         // testing reverseIntArray()
         int[] array1 = {1, 2, 3, 4, 5};
@@ -196,5 +195,10 @@ public class ArrayOpsTester {
         int[] reversedArr3 = ArrayOps.reverseIntArray(array3);
         ArrayOps.printIntegerArray(reversedArr3);
         // Output: [-4, -3, -2, -1]
+
+        int[] array4 = null; // null edge case
+        int[] reversedArr4 = ArrayOps.reverseIntArray(array4);
+        ArrayOps.printIntegerArray(reversedArr4);
+        // Output: []
     }
 }

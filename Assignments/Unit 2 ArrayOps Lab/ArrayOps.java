@@ -121,11 +121,13 @@ public class ArrayOps {
      * @return An int array representing the frequency of each letter in the input string.
      */
     public static int[] countLetterFrequencies(String input) {
-        int[] frequency = new int[26];
+        int[] frequency = new int[0];
 
         if (input != null) {
+            frequency = new int[26];
+
             for (int i = 0; i < frequency.length; i++) {
-                char curChar = (char) ('a' + i);
+                char curChar = (char) ('A' + i);
                 int count = 0;
                 for (int j = 0; j < input.length(); j++) {
                     if (input.charAt(j) == curChar || input.charAt(j) == (char) (curChar + 32)) {
@@ -221,7 +223,17 @@ public class ArrayOps {
      * @return The reversed array
      */
     public static int[] reverseIntArray(int[] array) {
-        return new int[0];
+        if (array == null) {
+            return new int[0];
+        }
+
+        int[] reversedArray = new int[array.length];
+
+        for (int index = 0; index < array.length; index++) {
+            reversedArray[index] = array[(array.length - 1) - index];
+        }
+
+        return reversedArray;
     }
 
 }
