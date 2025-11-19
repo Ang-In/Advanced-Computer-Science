@@ -19,7 +19,10 @@ public class StudentRecord {
     }
 
     public int getTestScore(int testNumber) {
-        if (testNumber < scores.length - 1 && testNumber > 0) {
+        if (scores == null) {
+            return -1;
+        }
+        if (testNumber < scores.length - 1 && testNumber >= 0) {
             return scores[testNumber];
         }
         return -1;
@@ -36,16 +39,21 @@ public class StudentRecord {
 
     // inherited methods
     public String toString() {
-        String statement = name + "'s scores: [";
+        String statement = name + "'s scores: ";
+        if (scores == null) {
+            statement += "null";
+            return statement;
+        }
+
+        statement += "[";
         for (int i = 0; i < this.scores.length; i++) {
-            if (i == this.scores.length - 1) {
-                statement += scores[i];
-                statement += "]";
-            } else {
-                statement += scores[i];
+            statement += scores[i];
+            if (i != this.scores.length - 1) {
                 statement += ", ";
             }
         }
+
+        statement += "]";
         return statement;
     }
 

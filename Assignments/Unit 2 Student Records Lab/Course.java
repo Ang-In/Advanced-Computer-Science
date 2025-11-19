@@ -29,24 +29,58 @@ public class Course {
 
     // inherited methods
 
-    // to-do: implement toString
+    public String toString() {
+        if (courseName == null || enrolledStudents == null) {
+            return "null";
+        }
+
+        String header = "== " + courseName + " ==\n";
+        String studentList = "";
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            studentList += (i + 1) + ".) " + enrolledStudents[i].toString();
+            if (i != enrolledStudents.length - 1) {
+                studentList += "\n";
+            }
+        }
+        String record = header + studentList;
+        return record;
+    }
 
     // methods
 
-    /*
-     * Iterates through the enrolledStudents array and returns the name of the student with the best
-     * final average.
-     * 
-     * @return the name of the student with the best final average
-     */
-    // to-do: implement findBestStudent
+    public String findBestStudent() {
+        String bestName = "";
+        double curBest = Double.MIN_VALUE;
+        if (enrolledStudents == null || enrolledStudents.length == 0) {
+            return "N/A";
+        }
 
-    /*
-     * Iterates through the enrolledStudents array and returns the average of the specified test
-     * number.
-     * 
-     * @return a double representing the average of the specified test number
-     */
-    // to-do: implement calculateTestAverage
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (enrolledStudents[i] != null && curBest < enrolledStudents[i].getFinalAverage()) {
+                curBest = enrolledStudents[i].getFinalAverage();
+                bestName = enrolledStudents[i].getName();
+            }
+        }
+
+        return bestName;
+    }
+
+    public double calculateTestAverage(int testNumber) {
+        double classAvg = 0.0;
+        int skipped = 0;
+        if (enrolledStudents == null || testNumber < 0 || testNumber >= enrolledStudents.length) {
+            return -1;
+        }
+
+        for (int i = 0; i < enrolledStudents.length; i++) {
+            if (enrolledStudents[i] == null || enrolledStudents[i].getTestScore(testNumber) == -1) {
+                skipped++;
+                continue;
+            }
+            classAvg += enrolledStudents[i].getTestScore(testNumber);
+        }
+
+        return classAvg / (enrolledStudents.length - skipped);
+    }
 
 }
