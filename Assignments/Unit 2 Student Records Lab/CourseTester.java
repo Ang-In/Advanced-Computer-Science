@@ -15,6 +15,9 @@ public class CourseTester {
         System.out.println("StudentRecord toString() functioning: "
                 + improved.toString().equals("Nellie's scores: [50, 60, 70, 85, 99]"));
         // Output: true
+        System.out.println("StudentRecord toString() functioning (null exception): "
+                + blank.toString().equals("null's scores: null"));
+        // Output: true
 
         System.out.println(precalc.toString());
         System.out.println("Course toString() functioning: " + precalc.toString().equals(
@@ -29,6 +32,16 @@ public class CourseTester {
         // Math: 50 + 60 + 70 = 120, 120/3 = 60
 
         // testing getTestScore()
-        System.out.println("StudentRecord getTestScore() functioning: " + );
+        System.out.println(
+                "StudentRecord getTestScore() functioning: " + (improved.getTestScore(0) == 50));
+        // Output: true
+        System.out.println("StudentRecord getTestScore() functioning (bounds exception): "
+                + (improved.getTestScore(6) == -1));
+        // Output: true
+        System.out.println("StudentRecord getTestScore() functioning (null exception): "
+                + (blank.getTestScore(0) == -1));
+        // Output: true
     }
+
+    // testing getFinalAverage()
 }
