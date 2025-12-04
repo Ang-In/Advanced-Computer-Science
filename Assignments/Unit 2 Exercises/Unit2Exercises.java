@@ -107,49 +107,154 @@ public class Unit2Exercises {
         }
 
         // dog loop
+        for (int i = 0; i < str.length(); i++) {
+            if (i >= str.length() - 2) {
+                continue;
+            }
+            if (str.charAt(i) != 'd' || str.charAt(i + 1) != 'o' || str.charAt(i + 2) != 'g') {
+                continue;
+            }
+            dogCount++;
+        }
+
+        if (catCount == dogCount) {
+            return true;
+        }
 
         return false;
     }
 
     public static String mixString(String a, String b) {
-        // to-do: implement this method
-        return "";
+        if (a == null && b == null) { // to-do: check and change later based on tester
+            return "";
+        } else if (a == null) {
+            return b;
+        } else if (b == null) {
+            return a;
+        }
+
+        String mixedString = "";
+        for (int i = 0; i < Math.min(a.length(), b.length()); i++) {
+            mixedString += a.charAt(i);
+            mixedString += b.charAt(i);
+        }
+
+        if (a.length() > b.length()) {
+            mixedString += a.substring(b.length());
+        } else if (a.length() < b.length()) {
+            mixedString += b.substring(a.length());
+        }
+
+        return mixedString;
 
     }
 
     public static String repeatEnd(String str, int n) {
-        // to-do: implement this method
-        return "";
+        if (str == null) {
+            return ""; // to-do: check and change later based on tester
+        }
+
+        String repeated = "";
+        for (int i = 0; i < n; i++) {
+            repeated += str.substring(str.length() - n);
+        }
+
+        return repeated;
     }
 
     public static boolean endOther(String a, String b) {
-        // to-do: implement this method
+        if (a == null || b == null) { // to-do: check and change later based on tester
+            return false;
+        }
+
+        String lowerA = a.toLowerCase();
+        String lowerB = b.toLowerCase();
+
+        if (lowerA.length() > lowerB.length()
+                && lowerA.substring(lowerA.length() - lowerB.length()).equals(lowerB)) {
+            return true; // b at the end of a, a longer
+        }
+        if (lowerA.length() < lowerB.length()
+                && lowerB.substring(lowerB.length() - lowerA.length()).equals(lowerA)) {
+            return true; // a at the end of b, b longer
+        }
+        if (lowerA.equals(lowerB)) {
+            return true; // a and b are same length, they're the same
+        }
+
         return false;
     }
 
     public static int countCode(String str) {
-        // to-do: implement this method
-        return 0;
+        if (str == null) {
+            return 0; // to-do: check and change later based on tester
+        }
+
+        int count = 0;
+        for (int i = 0; i < str.length() - 3; i++) {
+            if (str.charAt(i) == 'c' && str.charAt(i + 1) == 'o' && str.charAt(i + 3) == 'e') {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static int countEvens(int[] nums) {
-        // to-do: implement this method
-        return 0;
+        if (nums == null) {
+            return 0; // to-do: check and change later based on tester
+        }
+
+        int count = 0;
+        for (int i : nums) {
+            if (i % 2 == 0) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     public static int bigDiff(int[] nums) {
-        // to-do: implement this method
-        return 0;
+        if (nums == null || nums.length < 2) {
+            return -1; // to-do: check and change later based on tester
+        }
+
+        int smallest = Integer.MAX_VALUE;
+        int largest = Integer.MIN_VALUE;
+        for (int i : nums) {
+            smallest = Math.min(smallest, i);
+            largest = Math.max(largest, i);
+        }
+
+        return Math.abs(largest - smallest);
     }
 
     public static int sum13(int[] nums) {
-        // to-do: implement this method
-        return 0;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 13 || (i > 0 && nums[i - 1] == 13)) {
+                continue;
+            }
+            sum += nums[i];
+        }
+        return sum;
     }
 
     public static int[] fizzArray(int n) {
-        // to-do: implement this method
-        return new int[0];
+        if (n < 0) {
+            return new int[0]; // to-do: check and change later based on tester
+        }
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = i;
+        }
+
+        return ans;
     }
 
     public static boolean haveThree(int[] nums) {
