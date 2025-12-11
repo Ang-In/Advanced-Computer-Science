@@ -258,7 +258,12 @@ public class Unit2Exercises {
     }
 
     public static boolean haveThree(int[] nums) {
-        // to-do: implement this method
+        if (nums.length < 0) {
+            return false;
+        }
+
+
+
         return false;
 
     }
