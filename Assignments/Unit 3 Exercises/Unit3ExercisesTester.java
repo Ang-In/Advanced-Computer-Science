@@ -39,6 +39,26 @@ public class Unit3ExercisesTester {
         System.out.println("Testing calculateInterest()");
         testCalculateInterest();
         System.out.println();
+
+        System.out.println("Testing parsePositiveInteger()");
+        testParsePositiveInteger();
+        System.out.println();
+
+        System.out.println("Testing getArrayElement()");
+        testGetArrayElement();
+        System.out.println();
+
+        System.out.println("Testing calculateSquareRoot()");
+        testCalculateSquareRoot();
+        System.out.println();
+
+        System.out.println("Testing sumArrayElements()");
+        testSumArrayElements();
+        System.out.println();
+
+        System.out.println("Testing calculatePower()");
+        testCalculatePower();
+        System.out.println();
     }
 
     public static void testCalculateStringLengthAverage() {
@@ -310,6 +330,137 @@ public class Unit3ExercisesTester {
             System.out.println(e.toString());
             System.out.println(
                     "The method threw an exception when the years were negative, as intended");
+        }
+    }
+
+    public static void testParsePositiveInteger() {
+        // Test Case - Main Case
+        String testString = "10";
+        System.out.println("Expected 10: " + Unit3Exercises.parsePositiveInteger(testString));
+
+        // Test Case - Edge Case: Negative integer
+        try {
+            testString = "-10";
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.parsePositiveInteger(testString));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the string was a negative number, as intended");
+        }
+
+        // Test Case - Edge Case: Non-numerical string
+        try {
+            testString = "hello";
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.parsePositiveInteger(testString));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the string was not an integer, as intended");
+        }
+
+        // Test Case - Edge Case: Null string
+        try {
+            testString = null;
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.parsePositiveInteger(testString));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the string was null, as intended");
+        }
+    }
+
+    public static void testGetArrayElement() {
+        // Test Case - Main Case: Index in bounds
+        String[] testStrings = {"apple", "banana", "cherry", "durian"};
+        int testIndex = 0;
+        System.out.println(
+                "Expected apple: " + Unit3Exercises.getArrayElement(testStrings, testIndex));
+
+        // Test Case - Edge Case: Index out of bounds
+        try {
+            testIndex = 4;
+            System.out.println("Expected exception: "
+                    + Unit3Exercises.getArrayElement(testStrings, testIndex));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the index was out of bounds, as intended");
+        }
+
+        // Test Case - Edge Case: Array is null
+        try {
+            testStrings = null;
+            System.out.println("Expected exception: "
+                    + Unit3Exercises.getArrayElement(testStrings, testIndex));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the array was null, as intended");
+        }
+    }
+
+    public static void testCalculateSquareRoot() {
+        // Test Case - Main Case
+        int testInt = 25;
+        // expected output: 5
+        System.out.println("Expected 5: " + Unit3Exercises.calculateSquareRoot(testInt));
+        testInt = 64;
+        // expected output: 8
+        System.out.println("Expected 8: " + Unit3Exercises.calculateSquareRoot(testInt));
+
+        // Test Case - Edge Case: Negative input
+        try {
+            testInt = -1;
+            System.out
+                    .println("Expected exception: " + Unit3Exercises.calculateSquareRoot(testInt));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the input was negative, as intended");
+        }
+    }
+
+    public static void testSumArrayElements() {
+        // Test Case - Main Case: Positive Integers only
+        int[] nums = {1, -2, 3, -4, 5};
+        // expected output: 3
+        System.out.println("Expected 3: " + Unit3Exercises.sumArrayElements(nums));
+        System.out.println("(Base array: " + Utils.printIntArr(nums) + ")");
+
+        // Test Case - Edge Case: Null array
+        try {
+            nums = null;
+            System.out.print("Expected exception: " + Unit3Exercises.sumArrayElements(nums));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out
+                    .println("The method threw an exception when the array was null, as intended");
+        }
+    }
+
+    public static void testCalculatePower() {
+        // Test Case - Main Case
+        int testBase = 2;
+        int testPower = 2;
+        // expected output: 4
+        System.out.println("Expected 4: " + Unit3Exercises.calculatePower(testBase, testPower));
+        testBase = -5;
+        testPower = 3;
+        // expected output: -125
+        System.out.println("Expected -125: " + Unit3Exercises.calculatePower(testBase, testPower));
+
+        // Test Case - Edge Case: Negative exponenet
+        try {
+            testPower = -1;
+            System.out.println(
+                    "Expected exception: " + Unit3Exercises.calculatePower(testBase, testPower));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.out.println(
+                    "The method threw an exception when the input was negative, as intended");
         }
     }
 }

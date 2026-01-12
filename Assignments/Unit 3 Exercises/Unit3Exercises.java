@@ -154,4 +154,51 @@ public class Unit3Exercises {
         }
         return principal;
     }
+
+    public static int parsePositiveInteger(String str) {
+        int number = 1;
+        if (Integer.parseInt(str) < 0) {
+            throw new NumberFormatException("You must input a positive number!");
+        }
+
+        number = Integer.parseInt(str);
+        return number; // Method should return 1 if it's negative
+    }
+
+    public static String getArrayElement(String[] arr, int index) {
+
+        return arr[index];
+
+    }
+
+    public static double calculateSquareRoot(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(
+                    "You cannot take the square root of a negative number! (Result: " + Double.NaN
+                            + ")");
+        }
+
+        return Math.sqrt(number);
+
+    }
+
+    public static int sumArrayElements(int[] array) {
+
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+
+    }
+
+    public static double calculatePower(double base, int exponent) {
+        if (exponent < 0) {
+            throw new IllegalArgumentException("The exponent cannot be negative!");
+            // for this exercise only: in actual math, exponents can be negative.
+        }
+
+        return Math.pow(base, exponent);
+    }
+
 }
