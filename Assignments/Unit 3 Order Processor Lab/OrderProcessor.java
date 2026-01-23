@@ -15,8 +15,16 @@ public class OrderProcessor {
             double itemTotal = price * quantity;
             subtotal += itemTotal;
 
-
+            // Sort expensive items
+            if (isExpensive(name, price, 50.0)) {
+                expensiveItemsTemp[premiumCount] = name;
+                premiumCount += 1;
+            }
         }
+
+        double[] taxTotalArray = getTaxAndTotal(subtotal, taxRate);
+        double tax = taxTotalArray[0];
+        double total = taxTotalArray[1];
 
         // Trim premium items to exact size
         String[] expensiveItems = new String[premiumCount];
@@ -24,6 +32,22 @@ public class OrderProcessor {
             expensiveItems[i] = expensiveItemsTemp[i];
         }
 
+        printReceipt(total, subtotal, tax, expensiveItems);
+        return new OrderSummary(total, subtotal, tax, expensiveItems);
+    }
+
+    public static boolean isExpensive(String itemName, double itemPrice, double threshold) {
+        // Check if expensive
+        if (itemPrice > threshold) {
+            System.out.println(itemName + " is a premium item at $" + itemPrice);
+            return true;
+        } else {
+            System.out.println(itemName + " is a regular item at $" + itemPrice);
+            return false;
+        }
+    }
+
+    public static double[] getTaxAndTotal(double subtotal, double taxRate) {
         // Calculate tax and total
         double tax;
         double total;
@@ -34,28 +58,16 @@ public class OrderProcessor {
             tax = 0;
             total = 0;
         }
+        double[] taxTotalArray = {tax, total};
+        return taxTotalArray;
+    }
 
+    public static void printReceipt(double total, double subtotal, double tax,
+            String[] expensiveItems) {
         System.out.println("Subtotal: $" + subtotal);
         System.out.println("Tax: $" + tax);
         System.out.println("Total: $" + total);
-        System.out.println("Number of premium items: " + premiumCount);
-
-        return new OrderSummary(total, subtotal, tax, expensiveItems);
-    }
-
-    public static expensiveItemsSorting(Item[] items){
-        
-        for(int i = 0; i < items.length; i++){
-            // Check if expensive
-            if (price > 50.0) {
-                expensiveItemsTemp[premiumCount] = name;
-                premiumCount += 1;
-                System.out.println(name + " is a premium item at $" + price);
-            } else {
-                System.out.println(name + " is a regular item at $" + price);
-            }
-        }
-        
+        System.out.println("Number of premium items: " + expensiveItems.length);
     }
 
     public static int getPremiumCount(int premiumCount) {
