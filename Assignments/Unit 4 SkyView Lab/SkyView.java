@@ -19,12 +19,24 @@ public class SkyView {
         view = new double[numberOfRows][numberOfCols];
         int scannedIndex = 0;
         for (int i = 0; i < numberOfRows; i++) {
-            for (int j = 0; j < numberOfCols; j++) {
-                if (scannedIndex >= scanned.length) {
-                    view[i][j] = 0.0;
+            if (i % 2 == 0) { // L -> R
+                for (int j = 0; j < numberOfCols; j++) {
+                    if (scannedIndex >= scanned.length) {
+                        view[i][j] = 0.0;
+                    } else {
+                        view[i][j] = scanned[scannedIndex];
+                        scannedIndex++;
+                    }
                 }
-                view[i][j] = scanned[scannedIndex];
-                scannedIndex++;
+            } else { // R -> L
+                for (int j = numberOfCols - 1; j >= 0; j--) {
+                    if (scannedIndex >= scanned.length) {
+                        view[i][j] = 0.0;
+                    } else {
+                        view[i][j] = scanned[scannedIndex];
+                        scannedIndex++;
+                    }
+                }
             }
         }
     }
@@ -73,13 +85,31 @@ public class SkyView {
     }
 
     // methods
-    public double getAverage(int startRow, int endRow, int startCol, int endCol){
-        //0 <= startRow <= endRow < view.length, 0 <= startCol <= endCol < view[0].length
-        if()
+    public double getAverage(int startRow, int endRow, int startCol, int endCol) {
+        // 0 <= startRow <= endRow < view.length, 0 <= startCol <= endCol < view[0].length
+        if (startRow < 0 || endRow < 0 || startCol < 0 || endCol < 0) {
+            throw new IllegalArgumentException("Indexes must be >= 0.");
+        }
+        if (startRow > endRow || startCol > endCol) {
+            throw new IllegalArgumentException("Start must be <= end.");
+        }
+        if (endRow >= view.length) {
+            throw new IllegalArgumentException("Row indexes out of bounds.");
+        }
+        if (endCol >= view[0].length) {
+            throw new IllegalArgumentException("Col indexes out of bounds.");
+        }
 
         double avg = 0.0;
+        int count = 0;
 
-        return avg;
+        for (int r = startRow; r <= endRow; r++) {
+            for (int c = startCol; c <= endCol; c++) {
+                avg += view[r][c];
+                count++;
+            }
+        }
+
+        return avg / count;
     }
-
 }

@@ -25,32 +25,66 @@ public class ArrayVersusArrayList {
     // shifting all
     // other elements to the right.
     public static void lastComesFirst(String[] arr) {
-        // to-do: implement method
-
+        if (arr == null) {
+            throw new IllegalArgumentException("Cannot reorder a nonexistent array!");
+        }
+        if (arr.length != 0) {
+            String storage = arr[arr.length - 1];
+            for (int i = 0; i < arr.length; i++) {
+                String temp = arr[i];
+                arr[i] = storage;
+                storage = temp;
+            }
+        }
     }
 
     // modifies the given array by moving the last element to the first index, and
     // shifting all
     // other elements to the right.
     public static void lastComesFirst(ArrayList<String> arrList) {
-        // to-do: implement method
-
+        if (arrList == null) {
+            throw new IllegalArgumentException("Cannot reorder a nonexistent arraylist!");
+        }
+        if (arrList.size() != 0) {
+            String shifted = arrList.remove(arrList.size() - 1);
+            arrList.add(0, shifted);
+        }
     }
 
     // modifies the given array by moving the first element to the last index, and
     // shifting all
     // other elements to the left.
     public static void firstComesLast(String[] arr) {
-        // to-do: implement method
-
+        if (arr == null) {
+            throw new IllegalArgumentException("Cannot reorder a nonexistent array!");
+        }
+        if (arr.length != 0) {
+            String storage = "";
+            for (int i = 0; i < arr.length; i++) {
+                if (i == arr.length - 1) {
+                    arr[i] = storage;
+                } else if (i == 0) {
+                    storage = arr[i];
+                    arr[i] = arr[i + 1];
+                } else {
+                    arr[i] = arr[i + 1];
+                }
+            }
+        }
     }
 
     // modifies the given array by moving the first element to the last index, and
     // shifting all
     // other elements to the left.
     public static void firstComesLast(ArrayList<String> arrList) {
-        // to-do: implement method
+        if (arrList == null) {
+            throw new IllegalArgumentException("Cannot reorder a nonexistent arraylist!");
+        }
 
+        if (arrList.size() != 0) {
+            String shifted = arrList.remove(0);
+            arrList.add(arrList.size(), shifted);
+        }
     }
 
     // Test Methods
@@ -70,8 +104,8 @@ public class ArrayVersusArrayList {
     }
 
     public static void testLastComesFirst1() {
-        String[] strArray = { "first", "second", "third", "fourth", "fifth" };
-        String[] expectedArray = { "fifth", "first", "second", "third", "fourth" };
+        String[] strArray = {"first", "second", "third", "fourth", "fifth"};
+        String[] expectedArray = {"fifth", "first", "second", "third", "fourth"};
 
         System.out.println("\tTesting lastComesFirst():");
         System.out.println("\tOriginal: " + printArray(strArray));
@@ -85,8 +119,8 @@ public class ArrayVersusArrayList {
     }
 
     public static void testFirstComesLast1() {
-        String[] strArray = { "one", "two", "three", "four", "five" };
-        String[] expectedArray = { "two", "three", "four", "five", "one" };
+        String[] strArray = {"one", "two", "three", "four", "five"};
+        String[] expectedArray = {"two", "three", "four", "five", "one"};
 
         System.out.println("\tTesting firstComesLast():");
         System.out.println("\tOriginal: " + printArray(strArray));

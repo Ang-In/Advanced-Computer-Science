@@ -10,7 +10,7 @@ public class ArrayListPractice {
         fruitList.add("grape");
         fruitList.add("peach");
         fruitList.add("pineapple");
-        fruitList.add("orange");
+        // fruitList.add("orange");
 
         ArrayList<String> fruitList2 = new ArrayList<String>();
         fruitList2.add("apple");
@@ -19,7 +19,7 @@ public class ArrayListPractice {
         fruitList2.add("grape");
         fruitList2.add("peach");
         fruitList2.add("pineapple");
-        fruitList2.add("orange");
+        // fruitList2.add("orange");
 
         System.out.println("Odd length count: " + countOddLength(fruitList));
         System.out.println("Odd length count: " + countOddLengthForEachLoop(fruitList));
@@ -46,40 +46,80 @@ public class ArrayListPractice {
 
     // returns the number of Strings in the ArrayList with an odd length.
     public static int countOddLength(ArrayList<String> list) {
-        // to-do: implement method
-        return 0;
+        if (list == null) {
+            throw new IllegalArgumentException("Cannot count values in a nonexistent arraylist!");
+        }
+        int count = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).length() % 2 != 0) {
+                count++;
+            }
+        }
+        return count;
     }
 
     // returns the number of Strings in the ArrayList with an odd length using a
     // For-Each Loop.
     public static int countOddLengthForEachLoop(ArrayList<String> list) {
-        // to-do: implement method
-
-        return 0;
+        if (list == null) {
+            throw new IllegalArgumentException("Cannot count values in a nonexistent arraylist!");
+        }
+        int count = 0;
+        for (String val : list) {
+            if (val.length() % 2 != 0) {
+                count++;
+            }
+        }
+        return count;
     }
 
     // removes all Strings in the ArrayList that begin with the same letter as
     // firstLetter. Remove
     // them by iterating from the beginning of the list.
     public static void removeStrings(ArrayList<String> list, char firstLetter) {
-        // to-do: implement method
+        if (list == null) {
+            throw new IllegalArgumentException("Cannot remove values in a nonexistent arraylist!");
+        }
 
+        int moveUp = 1;
+        for (int i = 0; i < list.size(); i += moveUp) {
+            if (list.get(i).charAt(0) == firstLetter) {
+                list.remove(i);
+                moveUp = 0;
+            } else {
+                moveUp = 1;
+            }
+        }
     }
 
     // removes all Strings in the ArrayList that begin with the same letter as
     // firstLetter. Remove
     // them by iterating from the end of the list.
     public static void removeStrings2(ArrayList<String> list, char firstLetter) {
-        // to-do: implement method
+        if (list == null) {
+            throw new IllegalArgumentException("Cannot remove values in a nonexistent arraylist!");
+        }
+
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (list.get(i).charAt(0) == firstLetter) {
+                list.remove(i);
+            }
+        }
     }
 
     // counts and returns the number of times a the integer number is found in the
     // ArrayList. It
     // iterates through the list using a For-Each Loop.
     public static int numCount(ArrayList<Integer> list, int number) {
-        // to-do: implement method
-
-        return 0;
+        if (list == null) {
+            throw new IllegalArgumentException("Cannot count values in a nonexistent arraylist!");
+        }
+        int count = 0;
+        for (Integer val : list) {
+            if (val == number) {
+                count++;
+            }
+        }
+        return count;
     }
-
 }
