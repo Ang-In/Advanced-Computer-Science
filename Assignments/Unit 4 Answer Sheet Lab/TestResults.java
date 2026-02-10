@@ -59,13 +59,13 @@ public class TestResults {
 
     public String toString() {
         String message = "Answer Key: " + answerKey + "\n";
-        for (int i = 0; i < answers.size(); i++) {
-            message += answers.get(i);
-            if (i != answers.size() - 1) {
-                message += " ";
+        for (int i = 0; i < submissions.size(); i++) {
+            message = message + (i + 1) + ". ";
+            message += submissions.get(i).toString();
+            if (i != submissions.size() - 1) {
+                message += "\n";
             }
         }
-        message += "]";
         return message;
     }
 
