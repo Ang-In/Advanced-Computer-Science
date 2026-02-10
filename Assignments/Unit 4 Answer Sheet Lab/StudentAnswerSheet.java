@@ -54,6 +54,9 @@ public class StudentAnswerSheet {
 
     // inherited methods
     public boolean equals(StudentAnswerSheet other) {
+        if (other == null) {
+            return false;
+        }
         if (!(this.name.equals(other.name))) {
             return false;
         }
@@ -71,11 +74,11 @@ public class StudentAnswerSheet {
         String message = name + "'s test answers: [";
         for (int i = 0; i < answers.size(); i++) {
             message += answers.get(i);
-            if(i != answers.size() - 1){
+            if (i != answers.size() - 1) {
                 message += " ";
             }
         }
-        message += "]";
+        message = message + "] (Total Grade: " + testScore + ")";
         return message;
     }
 
@@ -91,9 +94,24 @@ public class StudentAnswerSheet {
 
         double grade = 0.0;
         for (int i = 0; i < key.size(); i++) {
-            if (answers.get(i) == null || answers.get(i).equals("?")) {
+            // precondition block
+            if (answers.get(i) == null || answers.get(i).equals("?") || answers.get(i).equals("")) {
                 continue;
             }
+            if (key.get(i) == null) {
+                continue;
+            }
+            if (answers.get(i).length() > 1 || key.get(i).length() > 1) {
+                continue;
+            }
+            if (answers.get(i).charAt(0) < 'A' || answers.get(i).charAt(0) > 'E') {
+                continue;
+            }
+            if (key.get(i).charAt(0) < 'A' || key.get(i).charAt(0) > 'E') {
+                continue;
+            }
+
+
             if (answers.get(i).equals(key.get(i))) {
                 grade += 1;
             } else {

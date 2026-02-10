@@ -43,7 +43,31 @@ public class TestResults {
     }
 
     // inherited methods
-    // to-do: override/create toString() and equals() methods
+    public boolean equals(TestResults other) {
+        if (other == null) {
+            return false;
+        }
+        if (!(this.answerKey.equals(other.answerKey))) {
+            return false;
+        }
+        if (!(this.submissions.equals(other.submissions))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public String toString() {
+        String message = "Answer Key: " + answerKey + "\n";
+        for (int i = 0; i < answers.size(); i++) {
+            message += answers.get(i);
+            if (i != answers.size() - 1) {
+                message += " ";
+            }
+        }
+        message += "]";
+        return message;
+    }
 
     // methods
     public void submit(StudentAnswerSheet student) {
