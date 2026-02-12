@@ -119,6 +119,7 @@ public class StudentAnswerSheet {
             }
         }
 
+        testScore = grade;
         return grade;
     }
 }
