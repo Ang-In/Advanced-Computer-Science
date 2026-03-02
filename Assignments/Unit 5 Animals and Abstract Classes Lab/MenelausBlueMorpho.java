@@ -1,4 +1,4 @@
-public class BaldEagle extends Animal {
+public class MenelausBlueMorpho extends Animal {
     // instance variables
     private final String scientificName;
     private final String habitat;
@@ -7,44 +7,45 @@ public class BaldEagle extends Animal {
     private final String movementMethod;
     private final String conservationStatus;
     private double wingspan;
-    private boolean isNesting;
+    private boolean isCamouflaged;
 
     // constructors
-    public BaldEagle(String name, double age, boolean isAlive, double hunger, double weight,
-            int speed, double wingspan, boolean isNesting) {
+    public MenelausBlueMorpho(String name, double age, boolean isAlive, double hunger, double weight,
+            int speed, double wingspan, boolean isCamouflaged) {
         setName(name);
         setAge(age);
+        setAlive(isAlive);
+        setHunger(hunger);
         setWeight(weight);
         setSpeed(speed);
-        setAlive(isAlive);
-        this.hunger = hunger;
         this.wingspan = wingspan;
-        this.isNesting = isNesting;
+        this.isCamouflaged = isCamouflaged;
 
         // species facts
-        this.scientificName = "Haliaeetus leucocephalus";
-        this.habitat = "North America - near large bodies of open water";
-        this.diet = "Carnivore - fish, waterfowl, and small mammals";
-        this.averageLifespan = 20;
+        this.scientificName = "Morpho menelaus";
+        this.habitat = "Central and South America - Along Rivers & Open Land";
+        this.diet = "Omnivores - Rotting Fruit, Tree Sap, Decaying Organic Matter";
+        this.averageLifespan = 115;
         this.movementMethod = "Flies";
         this.conservationStatus = "Least Concern";
     }
 
-    public BaldEagle() {
-        setName("Bald Eagle");
-        setAge(0);
-        setWeight(5.8);
-        setSpeed(120);
+    public MenelausBlueMorpho() {
+        setName("Menelaus Blue Morpho");
+        setAge(61);
         setAlive(true);
-        this.hunger = 50.0;
-        this.wingspan = 200.0;
-        this.isNesting = false;
+        setHunger(50);
+        setWeight(0.4);
+        setSpeed(5);
+        this.hunger = 50;
+        this.wingspan = 12;
+        this.isCamouflaged = false;
 
         // species facts
-        this.scientificName = "Haliaeetus leucocephalus";
-        this.habitat = "North America - near large bodies of open water";
-        this.diet = "Carnivore - fish, waterfowl, and small mammals";
-        this.averageLifespan = 20;
+        this.scientificName = "Morpho menelaus";
+        this.habitat = "Central and South America - Along Rivers & Open Land";
+        this.diet = "Omnivores - Rotting Fruit, Tree Sap, Decaying Organic Matter";
+        this.averageLifespan = 115;
         this.movementMethod = "Flies";
         this.conservationStatus = "Least Concern";
     }
@@ -58,8 +59,8 @@ public class BaldEagle extends Animal {
         return wingspan;
     }
 
-    public boolean isNesting() {
-        return isNesting;
+    public boolean isCamouflaged() {
+        return isCamouflaged;
     }
 
     // final variables
@@ -99,15 +100,21 @@ public class BaldEagle extends Animal {
     }
 
     public void setWingspan(double wingspan) {
+        if (wingspan < 12) {
+            throw new IllegalArgumentException("Minimum Wingspan is 12 cm!");
+        } else if (wingspan > 18) {
+            throw new IllegalArgumentException("Maximum Wingspan is 18 cm!");
+        }
+
         this.wingspan = wingspan;
     }
 
-    public void setNesting(boolean isNesting) {
-        this.isNesting = isNesting;
+    public void setCamoflaged(boolean isCamouflaged) {
+        this.isCamouflaged = isCamouflaged;
     }
 
     // inherited methods
-    public boolean equals(BaldEagle other) {
+    public boolean equals(MenelausBlueMorpho other) {
         if (!(this.getName().equals(other.getName()))) {
             return false;
         }
@@ -129,15 +136,12 @@ public class BaldEagle extends Animal {
         if (this.wingspan != other.wingspan) {
             return false;
         }
-        if (this.isNesting != other.isNesting) {
-            return false;
-        }
 
-        return true;
+        return false;
     }
 
     public String toString() {
-        String output = "== Bald Eagle Records ==";
+        String output = "== Menelaus Blue Morpho Butterfly Records ==";
 
         // specimen details
         String outName = "\nName: " + getName();
@@ -148,9 +152,9 @@ public class BaldEagle extends Animal {
         String outHunger = "\nHunger: " + hunger;
         String outWingspan = "\nWingspan: " + wingspan + " cm";
         String outSpeed = "\nSpeed: " + getSpeed();
-        String outNesting = "\nNesting: " + isNesting;
+        String outCamoflaging = "\nCamoflaging: " + isCamouflaged;
         String specimenDetails = outName + outScientificName + outAlive + outAge + outWeight
-                + outHunger + outWingspan + outSpeed + outNesting;
+                + outHunger + outWingspan + outSpeed + outCamoflaging;
 
         // general species details
         String outHabitat = "\nHabitat: " + habitat;
@@ -166,45 +170,30 @@ public class BaldEagle extends Animal {
     // methods
     public void feed() {
         if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot feed!");
+            throw new IllegalArgumentException("A dead butterfly cannot feed!");
         }
 
-        if (hunger > 0) {
-            hunger -= 20.0;
-            if (hunger < 0)
-                hunger = 0;
-            System.out.println(getName() + " has been fed. Hunger level: " + hunger);
-        } else {
-            System.out.println(getName() + " is not hungry.");
-        }
+        System.out.println(getName() + " has fed!");
+        setHunger(hunger - 10);
     }
 
-    public void hunt() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot hunt!");
-        }
-        if (isNesting) {
-            nest();
+    public void mate(MenelausBlueMorpho other) {
+        if (!(this.isAlive()) || !(other.isAlive())) {
+            throw new IllegalArgumentException("Cannot mate with a dead butterfly!");
         }
 
-        System.out.println(
-                getName() + " dives at " + (int) (getSpeed() * 1.3) + " km/h! -30 Hunger!");
-        hunger -= 30.0;
-        if (hunger < 0) {
-            hunger = 0;
-        }
-        System.out.println("Hunger level after hunt: " + hunger);
+        System.out.println(this.getName() + " is mating with " + other.getName() + "!");
     }
 
-    public void nest() {
+    public void camoflage() {
         if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot nest!");
+            throw new IllegalArgumentException("A dead butterfly cannot move!");
         }
 
-        if (isNesting) {
-            System.out.println(getName() + " has stopped nesting.");
+        if (isCamouflaged) {
+            System.out.println(getName() + " has stopped displaying its eyespots.");
         } else {
-            System.out.println(getName() + " is nesting...");
+            System.out.println(getName() + " is displaying its eyespots!");
         }
     }
 }

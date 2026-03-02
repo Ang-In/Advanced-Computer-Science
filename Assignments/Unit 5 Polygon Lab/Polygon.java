@@ -15,7 +15,6 @@ public abstract class Polygon {
         numberOfSides = sides;
     }
 
-
     public String toString() {
         return "This is a Polygon.";
     }
