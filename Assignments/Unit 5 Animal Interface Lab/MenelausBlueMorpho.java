@@ -1,4 +1,4 @@
-public class MenelausBlueMorpho extends Animal {
+public class MenelausBlueMorpho extends Animal implements Flyable, Pettable {
     // instance variables
     private final String dietFact;
     private final String averageLifespanFact;
@@ -19,11 +19,20 @@ public class MenelausBlueMorpho extends Animal {
         setCamoflaged(isCamouflaged);
 
         // species facts
-        this.dietFact = getScientificName() + " are ommivores- they eat rotting fruit, tree sap, or decaying organic matter, not nectar.";
-        this.averageLifespanFact = getScientificName() + " live for 115 days on average- just under 4 months.";
-        this.movementMethodFact = getScientificName() + "fly with a slow and floppy flight pattern.";
-        this.conservationStatusFact = getScientificName() + " have a conservation status of \"Least Concern\", ";
-        this.facts =  
+        this.dietFact = getScientificName()
+                + " are ommivores- they eat rotting fruit, tree sap, or decaying organic matter, not nectar.";
+        this.averageLifespanFact =
+                getScientificName() + " live for 115 days on average- just under 4 months.";
+        this.movementMethodFact =
+                getScientificName() + "fly with a slow and floppy flight pattern.";
+        this.conservationStatusFact = getScientificName()
+                + " have a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
+        this.miscFact = "The wings of " + getScientificName()
+                + " butterflies are hydrophobic: water droplets roll off the surface of their wings in a spherical ball.";
+
+        String[] morphoFacts = {dietFact, averageLifespanFact, movementMethodFact,
+                conservationStatusFact, miscFact};
+        facts = morphoFacts;
     }
 
     public MenelausBlueMorpho() {
@@ -34,10 +43,20 @@ public class MenelausBlueMorpho extends Animal {
         setCamoflaged(false);
 
         // species facts
-        this.diet = "Omnivores - Rotting Fruit, Tree Sap, Decaying Organic Matter";
-        this.averageLifespan = 115;
-        this.movementMethod = "Flies";
-        this.conservationStatus = "Least Concern";
+        this.dietFact = getScientificName()
+                + " are ommivores- they eat rotting fruit, tree sap, or decaying organic matter, not nectar.";
+        this.averageLifespanFact =
+                getScientificName() + " live for 115 days on average- just under 4 months.";
+        this.movementMethodFact =
+                getScientificName() + "fly with a slow and floppy flight pattern.";
+        this.conservationStatusFact = getScientificName()
+                + " have a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
+        this.miscFact = "The wings of " + getScientificName()
+                + " butterflies are hydrophobic: water droplets roll off the surface of their wings in a spherical ball.";
+
+        String[] morphoFacts = {dietFact, averageLifespanFact, movementMethodFact,
+                conservationStatusFact, miscFact};
+        facts = morphoFacts;
     }
 
     // getters
@@ -53,21 +72,29 @@ public class MenelausBlueMorpho extends Animal {
         return isCamouflaged;
     }
 
+    public String[] getFacts() {
+        return facts;
+    }
+
     // final variables
-    public String getDiet() {
-        return diet;
+    public String getDietFact() {
+        return dietFact;
     }
 
-    public double getAverageLifespan() {
-        return averageLifespan;
+    public String getAverageLifespanFact() {
+        return averageLifespanFact;
     }
 
-    public String getMovementMethod() {
-        return movementMethod;
+    public String getMovementMethodFact() {
+        return movementMethodFact;
     }
 
-    public String getConservationStatus() {
-        return conservationStatus;
+    public String getConservationStatusFact() {
+        return conservationStatusFact;
+    }
+
+    public String getMiscFact() {
+        return miscFact;
     }
 
     // setters
@@ -95,85 +122,127 @@ public class MenelausBlueMorpho extends Animal {
 
     // inherited methods
     public boolean equals(MenelausBlueMorpho other) {
-        if (!(this.getName().equals(other.getName()))) {
-            return false;
-        }
-        if (this.getAge() != other.getAge()) {
-            return false;
-        }
-        if (this.isAlive() != other.isAlive()) {
-            return false;
-        }
-        if (this.hunger != other.hunger) {
-            return false;
-        }
-        if (this.getWeight() != other.getWeight()) {
-            return false;
-        }
-        if (this.getSpeed() != other.getSpeed()) {
+        if (!(this.specimenName.equals(other.specimenName))) {
             return false;
         }
         if (this.wingspan != other.wingspan) {
             return false;
         }
-
-        return false;
-    }
-
-    public String toString() {
-        String output = "== Menelaus Blue Morpho Butterfly Records ==";
-
-        // specimen details
-        String outName = "\nName: " + getName();
-        String outScientificName = "\nScientific Name: " + scientificName;
-        String outAlive = "\nAlive: " + isAlive();
-        String outAge = "\nAge: " + getAge();
-        String outWeight = "\nWeight: " + getWeight();
-        String outHunger = "\nHunger: " + hunger;
-        String outWingspan = "\nWingspan: " + wingspan + " cm";
-        String outSpeed = "\nSpeed: " + getSpeed();
-        String outCamoflaging = "\nCamoflaging: " + isCamouflaged;
-        String specimenDetails = outName + outScientificName + outAlive + outAge + outWeight
-                + outHunger + outWingspan + outSpeed + outCamoflaging;
-
-        // general species details
-        String outHabitat = "\nHabitat: " + habitat;
-        String outDiet = "\nDiet: " + diet;
-        String outLifespan = "\nAverage Lifespan: " + averageLifespan;
-        String outMovement = "\nMovement: " + movementMethod;
-        String outConservation = "\nConservation Status: " + conservationStatus;
-        String speciesDetails = outHabitat + outDiet + outLifespan + outMovement + outConservation;
-
-        return output + specimenDetails + speciesDetails;
-    }
-
-    // methods
-    public void feed() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead butterfly cannot feed!");
+        if (this.isCamouflaged != other.isCamouflaged) {
+            return false;
+        }
+        for (int i = 0; i < facts.length; i++) {
+            if (!(this.facts[i].equals(other.facts[i]))) {
+                return false;
+            }
         }
 
-        System.out.println(getName() + " has fed!");
-        setHunger(hunger - 10);
+        return true;
     }
 
-    public void mate(MenelausBlueMorpho other) {
-        if (!(this.isAlive()) || !(other.isAlive())) {
-            throw new IllegalArgumentException("Cannot mate with a dead butterfly!");
-        }
+    // to-do: fix toString to work w/ new Animal class
+    /*
+     * public String toString() { String output = "== Menelaus Blue Morpho Butterfly Records ==";
+     * 
+     * // specimen details String outName = "\nName: " + getName(); String outScientificName =
+     * "\nScientific Name: " + scientificName; String outAlive = "\nAlive: " + isAlive(); String
+     * outAge = "\nAge: " + getAge(); String outWeight = "\nWeight: " + getWeight(); String
+     * outHunger = "\nHunger: " + hunger; String outWingspan = "\nWingspan: " + wingspan + " cm";
+     * String outSpeed = "\nSpeed: " + getSpeed(); String outCamoflaging = "\nCamoflaging: " +
+     * isCamouflaged; String specimenDetails = outName + outScientificName + outAlive + outAge +
+     * outWeight + outHunger + outWingspan + outSpeed + outCamoflaging;
+     * 
+     * // general species details String outHabitat = "\nHabitat: " + habitat; String outDiet =
+     * "\nDiet: " + diet; String outLifespan = "\nAverage Lifespan: " + averageLifespan; String
+     * outMovement = "\nMovement: " + movementMethod; String outConservation =
+     * "\nConservation Status: " + conservationStatus; String speciesDetails = outHabitat + outDiet
+     * + outLifespan + outMovement + outConservation;
+     * 
+     * return output + specimenDetails + speciesDetails; }
+     */
 
-        System.out.println(this.getName() + " is mating with " + other.getName() + "!");
+    public String getFact(int index) {
+        return facts[index];
     }
 
-    public void camoflage() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead butterfly cannot move!");
-        }
-
-        if (isCamouflaged) {
-            System.out.println(getName() + " has stopped displaying its eyespots.");
-        } else {
-            System.out.println(getName() + " is displaying its eyespots!");
-        }
+    public String getFact() {
+        return facts[Utils.generateRandomInt(0, 5)];
     }
+
+    // Basic Behaviors
+    public void makeSound() {
+        System.out.println("Soft rustling sounds ensue as the butterfly walks along a surface.");
+    }
+
+    public void eat() {
+        System.out.println(
+                "Very soft slurping sounds ensue as the butterfly consumes some detritus.");
+    }
+
+    public void move() {
+        System.out.println("Soft wingflaps ensue as the butterfly soars.");
+    }
+
+    public String getSoundDescription() {
+        return "Soft rustling sounds ensue as the butterfly walks along a surface.";
+    }
+
+    public String getEatDescription() {
+        return "Very soft slurping sounds ensue as the butterfly consumes some detritus.";
+    }
+
+    public String getMoveDescription() {
+        return "Soft wingflaps ensue as the butterfly soars.";
+    }
+
+    // methods (interface)
+    // Flyable
+    public double getFlightSpeed() {
+        return 8.05;
+    }
+
+    public double getMaxAltitude() {
+        return 20.0;
+    }
+
+    // Basic Behaviors
+    public void takeOff() {
+        System.out
+                .println("The butterfly flaps its wings a few times before soaring into the air.");
+    }
+
+    public void fly() {
+        System.out.println("The butterfly flaps its wings, which shimmer in the light.");
+    }
+
+    public void land() {
+        System.out.println(
+                "The butterfly flaps its wings rapidly to control its descent, before landing softly.");
+    }
+
+    // Pettable
+    public int getFriendlinessLevel() {
+        return 3;
+    }
+
+    public int getEnergyLevel() {
+        return 7;
+    }
+
+    // Basic Behaviors - BE CREATIVE
+
+    public void greetHuman() {
+        System.out.println("The butterfly flaps its wings, fluttering about its enclosure.");
+    }
+
+    // prints out how the animal reacts when it is being petted
+    public void bePetted() {
+        System.out.println("The butterfly flies away, spooked.");
+    }
+
+    public void playWithHuman() {
+        System.out.println(
+                "The butterfly waves its wings around, showing off it's multiple colorations.");
+    }
+
 }
