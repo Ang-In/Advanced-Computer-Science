@@ -1,25 +1,38 @@
 public class BaldEagle extends Animal {
     // instance variables
-    private final String scientificName;
-    private final String habitat;
-    private final String diet;
-    private final int averageLifespan;
-    private final String movementMethod;
-    private final String conservationStatus;
+    private final String dietFact;
+    private final String averageLifespanFact;
+    private final String movementMethodFact;
+    private final String conservationStatusFact;
+    private final String miscFact;
+    private String specimenName;
     private double wingspan;
     private boolean isNesting;
+    private String[] facts;
 
     // constructors
-    public BaldEagle(String name, double age, boolean isAlive, double hunger, double weight,
-            int speed, double wingspan, boolean isNesting) {
-        setName(name);
-        setAge(age);
-        setWeight(weight);
-        setSpeed(speed);
-        setAlive(isAlive);
-        this.hunger = hunger;
-        this.wingspan = wingspan;
-        this.isNesting = isNesting;
+    public BaldEagle(String specimenName, double wingspan, boolean isNesting) {
+        super("Bald Eagle", "Accipitriformes", "Accipitridae", "Haliaeetus", "leucocephalus",
+                "North America - near large bodies of open water");
+        setSpecimenName(specimenName);
+        setWingspan(wingspan);
+        setNesting(isNesting);
+
+        // species facts
+        this.dietFact = getScientificName()
+                + " are carnivores- they eat fish, waterfowl, and small mammals, though they fish via swooping and snatching them straight from a body of water.";
+        this.averageLifespanFact = getScientificName()
+                + " butterflies live for 115 days on average- just under 4 months.";
+        this.movementMethodFact =
+                getScientificName() + " butterflies fly with a slow and floppy flight pattern.";
+        this.conservationStatusFact = getScientificName()
+                + " has a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
+        this.miscFact = "The wings of " + getScientificName()
+                + " butterflies are hydrophobic: water droplets roll off the surface of their wings in a spherical ball.";
+
+        String[] morphoFacts = {dietFact, averageLifespanFact, movementMethodFact,
+                conservationStatusFact, miscFact};
+        facts = morphoFacts;
 
         // species facts
         this.scientificName = "Haliaeetus leucocephalus";
@@ -31,14 +44,11 @@ public class BaldEagle extends Animal {
     }
 
     public BaldEagle() {
-        setName("Bald Eagle");
-        setAge(0);
-        setWeight(5.8);
-        setSpeed(120);
-        setAlive(true);
-        this.hunger = 50.0;
-        this.wingspan = 200.0;
-        this.isNesting = false;
+        super("Bald Eagle", "Accipitriformes", "Accipitridae", "Haliaeetus", "leucocephalus",
+                "North America - near large bodies of open water");
+        setSpecimenName(specimenName);
+        setWingspan(wingspan);
+        setNesting(false);
 
         // species facts
         this.scientificName = "Haliaeetus leucocephalus";
@@ -50,8 +60,8 @@ public class BaldEagle extends Animal {
     }
 
     // getters
-    public double getHunger() {
-        return hunger;
+    public String getSpecimenName() {
+        return specimenName;
     }
 
     public double getWingspan() {
@@ -62,40 +72,38 @@ public class BaldEagle extends Animal {
         return isNesting;
     }
 
+    public String[] getFacts() {
+        return facts;
+    }
+
     // final variables
-    public String getScientificName() {
-        return scientificName;
+    public String getDietFact() {
+        return dietFact;
     }
 
-    public String getHabitat() {
-        return habitat;
+    public String getAverageLifespanFact() {
+        return averageLifespanFact;
     }
 
-    public String getDiet() {
-        return diet;
+    public String getMovementMethodFact() {
+        return movementMethodFact;
     }
 
-    public double getAverageLifespan() {
-        return averageLifespan;
+    public String getConservationStatusFact() {
+        return conservationStatusFact;
     }
 
-    public String getMovementMethod() {
-        return movementMethod;
-    }
-
-    public String getConservationStatus() {
-        return conservationStatus;
+    public String getMiscFact() {
+        return miscFact;
     }
 
     // setters
-    public void setHunger(double hunger) {
-        if (hunger < 0) {
-            hunger = 0;
-        } else if (hunger > 100) {
-            hunger = 100;
+    public void setSpecimenName(String specimenName) {
+        if (specimenName == null || specimenName.equals("")) {
+            throw new IllegalArgumentException("Cannot set specimen name to nothing!");
         }
 
-        this.hunger = hunger;
+        this.specimenName = specimenName;
     }
 
     public void setWingspan(double wingspan) {
@@ -136,6 +144,7 @@ public class BaldEagle extends Animal {
         return true;
     }
 
+    // to-do: fix toString to work w/ new Animal class
     public String toString() {
         String output = "== Bald Eagle Records ==";
 

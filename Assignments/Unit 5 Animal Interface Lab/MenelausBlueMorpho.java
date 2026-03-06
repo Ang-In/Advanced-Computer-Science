@@ -20,13 +20,13 @@ public class MenelausBlueMorpho extends Animal implements Flyable, Pettable {
 
         // species facts
         this.dietFact = getScientificName()
-                + " are ommivores- they eat rotting fruit, tree sap, or decaying organic matter, not nectar.";
+                + " butterflies are ommivores- they eat rotting fruit, tree sap, or decaying organic matter, not nectar.";
         this.averageLifespanFact =
-                getScientificName() + " live for 115 days on average- just under 4 months.";
+                getScientificName() + " butterflies live for 115 days on average- just under 4 months.";
         this.movementMethodFact =
-                getScientificName() + "fly with a slow and floppy flight pattern.";
+                getScientificName() + " butterflies fly with a slow and floppy flight pattern.";
         this.conservationStatusFact = getScientificName()
-                + " have a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
+                + " has a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
         this.miscFact = "The wings of " + getScientificName()
                 + " butterflies are hydrophobic: water droplets roll off the surface of their wings in a spherical ball.";
 
@@ -39,7 +39,7 @@ public class MenelausBlueMorpho extends Animal implements Flyable, Pettable {
         super("Menelaus Blue Morpho", " Lepidoptera", "Nymphalidae", "Morpho", "menelaus",
                 "Central and South America - Along Rivers & Open Land");
         setSpecimenName("Blue Morpho Butterfly");
-        setWingspan(wingspan);
+        setWingspan(12);
         setCamoflaged(false);
 
         // species facts
