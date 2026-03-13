@@ -51,6 +51,7 @@ public class AnimalShowcaseGUI {
         // Animal and may implement one or more interfaces.
         animals = new ArrayList<>();
         animals.add(new MenelausBlueMorpho());
+        animals.add(new BaldEagle());
 
         // Try to use the operating system's native look-and-feel
         // so the window blends in with other apps on the user's computer.

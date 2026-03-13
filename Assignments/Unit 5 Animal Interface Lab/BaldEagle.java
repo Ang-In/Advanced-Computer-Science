@@ -1,4 +1,4 @@
-public class BaldEagle extends Animal {
+public class BaldEagle extends Animal implements Flyable, Predator {
     // instance variables
     private final String dietFact;
     private final String averageLifespanFact;
@@ -22,41 +22,40 @@ public class BaldEagle extends Animal {
         this.dietFact = getScientificName()
                 + " are carnivores- they eat fish, waterfowl, and small mammals, though they fish via swooping and snatching them straight from a body of water.";
         this.averageLifespanFact = getScientificName()
-                + " butterflies live for 115 days on average- just under 4 months.";
-        this.movementMethodFact =
-                getScientificName() + " butterflies fly with a slow and floppy flight pattern.";
+                + " live for 20 years on average, but the oldest recorded wild eagle lived for 38 years- almost double the average!";
+        this.movementMethodFact = getScientificName() + " ";
         this.conservationStatusFact = getScientificName()
-                + " has a conservation status of \"Least Concern\", despite collectors prizing these butterflies for their iridescent blue wings.";
-        this.miscFact = "The wings of " + getScientificName()
-                + " butterflies are hydrophobic: water droplets roll off the surface of their wings in a spherical ball.";
+                + " has a conservation status of \"Least Concern\", but they used to be hunted extensively to the point where they were at risk of becoming extinct in the wild within the United States.";
+        this.miscFact = getScientificName()
+                + " make the largest tree nests ever recorded out of every species on Earth, up to 4 meters deep and 2.5 meters wide.";
 
-        String[] morphoFacts = {dietFact, averageLifespanFact, movementMethodFact,
+        String[] eagleFacts = {dietFact, averageLifespanFact, movementMethodFact,
                 conservationStatusFact, miscFact};
-        facts = morphoFacts;
-
-        // species facts
-        this.scientificName = "Haliaeetus leucocephalus";
-        this.habitat = "North America - near large bodies of open water";
-        this.diet = "Carnivore - fish, waterfowl, and small mammals";
-        this.averageLifespan = 20;
-        this.movementMethod = "Flies";
-        this.conservationStatus = "Least Concern";
+        facts = eagleFacts;
     }
 
     public BaldEagle() {
         super("Bald Eagle", "Accipitriformes", "Accipitridae", "Haliaeetus", "leucocephalus",
                 "North America - near large bodies of open water");
-        setSpecimenName(specimenName);
-        setWingspan(wingspan);
+        setSpecimenName("American Bald Eagle");
+        setWingspan(2);
         setNesting(false);
 
         // species facts
-        this.scientificName = "Haliaeetus leucocephalus";
-        this.habitat = "North America - near large bodies of open water";
-        this.diet = "Carnivore - fish, waterfowl, and small mammals";
-        this.averageLifespan = 20;
-        this.movementMethod = "Flies";
-        this.conservationStatus = "Least Concern";
+        this.dietFact = getScientificName()
+                + " are carnivores- they eat fish, waterfowl, and small mammals, though they fish via swooping and snatching them straight from a body of water.";
+        this.averageLifespanFact = getScientificName()
+                + " live for 20 years on average, but the oldest recorded wild eagle lived for 38 years- almost double the average!";
+        this.movementMethodFact = getScientificName()
+                + " can migrate: if the nearest water source is unavailable during the wintertime via freezing over, they will migrate to a coast or southward.";
+        this.conservationStatusFact = getScientificName()
+                + " has a conservation status of \"Least Concern\", but they used to be hunted extensively to the point where they were at risk of becoming extinct in the wild within the United States.";
+        this.miscFact = getScientificName()
+                + " make the largest tree nests ever recorded out of every species on Earth, up to 4 meters deep and 2.5 meters wide.";
+
+        String[] eagleFacts = {dietFact, averageLifespanFact, movementMethodFact,
+                conservationStatusFact, miscFact};
+        facts = eagleFacts;
     }
 
     // getters
@@ -116,22 +115,7 @@ public class BaldEagle extends Animal {
 
     // inherited methods
     public boolean equals(BaldEagle other) {
-        if (!(this.getName().equals(other.getName()))) {
-            return false;
-        }
-        if (this.getAge() != other.getAge()) {
-            return false;
-        }
-        if (this.isAlive() != other.isAlive()) {
-            return false;
-        }
-        if (this.hunger != other.hunger) {
-            return false;
-        }
-        if (this.getWeight() != other.getWeight()) {
-            return false;
-        }
-        if (this.getSpeed() != other.getSpeed()) {
+        if (!(this.getSpecimenName().equals(other.getSpecimenName()))) {
             return false;
         }
         if (this.wingspan != other.wingspan) {
@@ -145,75 +129,115 @@ public class BaldEagle extends Animal {
     }
 
     // to-do: fix toString to work w/ new Animal class
-    public String toString() {
-        String output = "== Bald Eagle Records ==";
+    // public String toString() {
+    // String output = "== Bald Eagle Records ==";
 
-        // specimen details
-        String outName = "\nName: " + getName();
-        String outScientificName = "\nScientific Name: " + scientificName;
-        String outAlive = "\nAlive: " + isAlive();
-        String outAge = "\nAge: " + getAge();
-        String outWeight = "\nWeight: " + getWeight();
-        String outHunger = "\nHunger: " + hunger;
-        String outWingspan = "\nWingspan: " + wingspan + " cm";
-        String outSpeed = "\nSpeed: " + getSpeed();
-        String outNesting = "\nNesting: " + isNesting;
-        String specimenDetails = outName + outScientificName + outAlive + outAge + outWeight
-                + outHunger + outWingspan + outSpeed + outNesting;
+    // // specimen details
+    // String outName = "\nName: " + getName();
+    // String outScientificName = "\nScientific Name: " + getScientificName();
+    // String outAlive = "\nAlive: " + isAlive();
+    // String outAge = "\nAge: " + getAge();
+    // String outWeight = "\nWeight: " + getWeight();
+    // String outHunger = "\nHunger: " + hunger;
+    // String outWingspan = "\nWingspan: " + wingspan + " cm";
+    // String outSpeed = "\nSpeed: " + getSpeed();
+    // String outNesting = "\nNesting: " + isNesting;
+    // String specimenDetails = outName + outScientificName + outAlive + outAge + outWeight
+    // + outHunger + outWingspan + outSpeed + outNesting;
 
-        // general species details
-        String outHabitat = "\nHabitat: " + habitat;
-        String outDiet = "\nDiet: " + diet;
-        String outLifespan = "\nAverage Lifespan: " + averageLifespan;
-        String outMovement = "\nMovement: " + movementMethod;
-        String outConservation = "\nConservation Status: " + conservationStatus;
-        String speciesDetails = outHabitat + outDiet + outLifespan + outMovement + outConservation;
+    // // general species details
+    // String outHabitat = "\nHabitat: " + habitat;
+    // String outDiet = "\nDiet: " + diet;
+    // String outLifespan = "\nAverage Lifespan: " + averageLifespan;
+    // String outMovement = "\nMovement: " + movementMethod;
+    // String outConservation = "\nConservation Status: " + conservationStatus;
+    // String speciesDetails = outHabitat + outDiet + outLifespan + outMovement + outConservation;
 
-        return output + specimenDetails + speciesDetails;
+    // return output + specimenDetails + speciesDetails;
+    // }
+
+    public String getFact(int index) {
+        return facts[index];
     }
 
-    // methods
-    public void feed() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot feed!");
-        }
-
-        if (hunger > 0) {
-            hunger -= 20.0;
-            if (hunger < 0)
-                hunger = 0;
-            System.out.println(getName() + " has been fed. Hunger level: " + hunger);
-        } else {
-            System.out.println(getName() + " is not hungry.");
-        }
+    public String getFact() {
+        return facts[Utils.generateRandomInt(0, 5)];
     }
 
-    public void hunt() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot hunt!");
-        }
-        if (isNesting) {
-            nest();
-        }
+    // Basic Behaviors
+    public void makeSound() {
+        System.out
+                .println("The eagle makes a few weak, staccato whistles: \"Kleek kik ik ik ik!\"");
+    }
 
+    public void eat() {
+        System.out.println("The sound of tearing flesh ensues as the eagle consumes a fish.");
+    }
+
+    public void move() {
+        System.out.println("Strong wingflaps are heard as the eagle soars to its destination.");
+    }
+
+    public String getSoundDescription() {
+        return "The eagle makes a few weak, staccato whistles: \"Kleek kik ik ik ik!\"";
+    }
+
+    public String getEatDescription() {
+        return "The sound of tearing flesh ensues as the eagle consumes a fish.";
+    }
+
+    public String getMoveDescription() {
+        return "Strong wingflaps are heard as the eagle soars to its destination.";
+    }
+
+    // methods (interfaces)
+    // Flyable
+    public double getFlightSpeed() {
+        return 63.0;
+    }
+
+    public double getMaxAltitude() {
+        return 27.0;
+    }
+
+    // Basic Behaviors
+    public void takeOff() {
         System.out.println(
-                getName() + " dives at " + (int) (getSpeed() * 1.3) + " km/h! -30 Hunger!");
-        hunger -= 30.0;
-        if (hunger < 0) {
-            hunger = 0;
-        }
-        System.out.println("Hunger level after hunt: " + hunger);
+                "The eagle spreads its wings and flaps once, soaring into the air with grace.");
     }
 
-    public void nest() {
-        if (!(this.isAlive())) {
-            throw new IllegalArgumentException("A dead eagle cannot nest!");
-        }
+    public void fly() {
+        System.out.println("The eagle flaps its wings occasionally, gliding with the winds.");
+    }
 
-        if (isNesting) {
-            System.out.println(getName() + " has stopped nesting.");
-        } else {
-            System.out.println(getName() + " is nesting...");
-        }
+    public void land() {
+        System.out.println(
+                "The eagle flaps its wings rapidly to control its descent, before landing with grace.");
+    }
+
+    // Predator
+    public String getPrimaryPrey() {
+        return "Fish";
+    }
+
+    public double getAveragePreyMass() {
+        return 0.16; // kg
+    }
+
+    // Basic Behaviors - BE CREATIVE
+
+    public void stalkPrey() {
+        System.out
+                .println("The eagle circles the body of water, searching for which fish to hunt.");
+    }
+
+    public void attackPrey() {
+        System.out.println(
+                "The eagle dives at blistering speeds, snatching the fish straight from the water before flying to shore.");
+    }
+
+    public void eatPrey() {
+        System.out.println(
+                "The eagle feasts in solitude, using its beak to tear open the fish and fill its stomach.");
     }
 }

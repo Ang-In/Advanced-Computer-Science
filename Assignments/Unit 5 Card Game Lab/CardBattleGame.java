@@ -43,25 +43,31 @@ public class CardBattleGame {
             move = 2;
         }
 
-
         boolean gameOver = false;
         while (!gameOver) {
             if (move % 2 == 1) { // Player's Turn
-                System.out.println("Player's Turn:");
+                // Lose condition
                 if (!player.hasAnythingLeft()) {
                     System.out.println("GAME OVER");
                     winner = "Bot";
                     break;
                 }
 
+                System.out.println("Player's Turn:");
+                drawAndPlayIfNeeded(player, bot);
+                attackOnce(player, bot);
+
                 move = 2;
             } else { // Bot's Turn
-                System.out.println("Bot's Turn:");
                 if (!bot.hasAnythingLeft()) {
                     System.out.println("GAME OVER");
                     winner = "Player";
                     break;
                 }
+
+                System.out.println("Bot's Turn:");
+                drawAndPlayIfNeeded(bot, player);
+                attackOnce(bot, player);
 
                 move = 1;
             }
@@ -82,16 +88,33 @@ public class CardBattleGame {
         Card actingCard = self.getActive();
         Card otherCard = other.getActive();
 
+        // draw top card if none active
         if (actingCard == null) {
             self.setActive(self.getDeck().removeFirst());
+            actingCard = self.getActive();
         }
         if (otherCard == null) {
             other.setActive(other.getDeck().removeFirst());
+            otherCard = other.getActive();
         }
 
+        // apply on-play effects
         actingCard.applySelfOnPlay();
-        System.out.println(self.getName() + " played: " + actingCard);
-        
+        System.out.println(self.getName() + " played: " + actingCard.toString());
+        if (actingCard.getAbility().getId().equals("RIPPLE")) {
+            // ripple damage
+            int rippleDmg = actingCard.getAbility().pingDamageOnPlay();
+            otherCard.takeDamage(rippleDmg);
+            System.out.println(otherCard.getName() + " takes " + rippleDmg + " ripple damage!");
+            System.out.println(
+                    otherCard.getName() + " health after ripple damage: " + otherCard.getHealth());
+            if (!isActiveCardDead(other)) {
+                // ripple cycle
+                other.getDeck().add(otherCard);
+                other.setActive(other.getDeck().removeFirst());
+                otherCard = other.getActive();
+            }
+        }
     }
 
     // One attack (self active attacks other active if both exist)
@@ -99,21 +122,41 @@ public class CardBattleGame {
         if (attacker == null || defender == null) {
             throw new IllegalArgumentException("Cannot attack without two decks!");
         }
+        // in case of ripple effect
+        if (defender.getActive() == null) {
+            defender.setActive(defender.getDeck().removeFirst());
+        }
 
         Card offenseCard = attacker.getActive();
         Card defenseCard = defender.getActive();
 
         int dmg = attacker.getActive().computeDamageAgainst(defender.getActive());
-        System.out.println(offenseCard.getName() + " attacks " + defenseCard.getName() + " for " + dmg);
-        defender.getActive().takeDamage(dmg);
-        System.out.println(defenseCard.getName() + " after dmg: " + b);
+        System.out.println(offenseCard.getName() + " attacks " + defenseCard.getName() + " for "
+                + dmg + " damage!");
+        defenseCard.takeDamage(dmg);
+        System.out.println(
+                defenseCard.getName() + " health after damage: " + defenseCard.getHealth());
+        isActiveCardDead(defender);
+    }
+
+    public static boolean isActiveCardDead(PlayerState user) {
+        Card mayBeDefeatedCard = user.getActive();
+        if (mayBeDefeatedCard.isDefeated()) {
+            System.out.println(mayBeDefeatedCard.getName() + " has fallen!");
+            user.setActive(null);
+            if (user.hasAnythingLeft()) {
+                user.setActive(user.getDeck().removeFirst());
+            }
+            return true;
+        }
+        return false;
     }
 
     // Optional local run (not graded)
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<Card> player = DeckValidator.buildDefaultDeck();
+        ArrayList<Card> player = DeckValidator.buildUserDeck(sc);
         ArrayList<Card> bot = DeckBuilderBot.buildBotDeck();
 
         if (!DeckValidator.isValidDeck(player)) {

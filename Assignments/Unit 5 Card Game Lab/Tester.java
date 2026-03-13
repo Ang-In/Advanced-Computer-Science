@@ -42,7 +42,7 @@ public class Tester {
 
         // Optional: run your full game if DeckValidator + CardBattleGame exist
         try {
-            ArrayList<Card> player = DeckBuilderBot.buildBotDeck();
+            ArrayList<Card> player = DeckValidator.buildDefaultDeck();
             ArrayList<Card> bot = DeckBuilderBot.buildBotDeck();
 
             System.out.println("\n== RUNNING GAME (if implemented) ==");

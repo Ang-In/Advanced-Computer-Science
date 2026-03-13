@@ -65,6 +65,7 @@ public class DeckValidator {
                 continue;
             }
             if (abilities.contains(card.getAbility().getId())) {
+                System.out.println("Invalid: Duplicate abilities!");
                 return false;
             } else {
                 abilities.add(card.getAbility().getId());
@@ -84,12 +85,15 @@ public class DeckValidator {
 
         for (Card card : deck) {
             if (card.getStrength() < 1 || card.getStrength() > 5) {
+                System.out.println("Invalid: Strength out of range (1-5)!");
                 return false;
             }
             if (card.getHealth() < 1 || card.getHealth() > 5) {
+                System.out.println("Invalid: Health out of range (1-5)!");
                 return false;
             }
             if (card.getStrength() + card.getHealth() > 6) {
+                System.out.println("Invalid: Strength and health sum out of range (< or = to 6)!");
                 return false;
             }
         }
@@ -125,14 +129,20 @@ public class DeckValidator {
     // or use the createCard() helper below.
     public static ArrayList<Card> buildDefaultDeck() {
         ArrayList<Card> newDeck = new ArrayList<Card>(5);
-        // base 3
-        newDeck.add(createCard("P1", CardType.fromText("granite"), 3, 3, AbilityLibrary.NONE));
-        newDeck.add(createCard("P2", CardType.fromText("parchment"), 3, 3, AbilityLibrary.NONE));
-        newDeck.add(createCard("P3", CardType.fromText("blade"), 3, 3, AbilityLibrary.NONE));
+        for (int i = 0; i < 5; i++) {
+            String name = "P" + (i + 1);
+            CardType type;
+            // type cycle
+            if (i % 3 == 0) {
+                type = CardType.GRANITE;
+            } else if (i % 3 == 1) {
+                type = CardType.PARCHMENT;
+            } else {
+                type = CardType.BLADE;
+            }
 
-        // bonus 2
-        newDeck.add(createCard("P4", CardType.fromText("granite"), 3, 3, AbilityLibrary.NONE));
-        newDeck.add(createCard("P5", CardType.fromText("blade"), 3, 3, AbilityLibrary.NONE));
+            newDeck.add(createCard(name, type, 3, 3, AbilityLibrary.NONE));
+        }
 
         return newDeck;
     }
@@ -164,6 +174,7 @@ public class DeckValidator {
                 type = CardType.fromText(sc.next());
             }
 
+            System.out.println("Note: Card strength + health must be less than or equal to 6!");
             System.out.println("Enter card strength (1-5): ");
             int strength = Integer.parseInt(sc.next());
             while (strength < 1 || strength > 5) {
