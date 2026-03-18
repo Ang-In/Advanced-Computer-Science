@@ -43,6 +43,10 @@ public class BattleEngine {
             throw new IllegalArgumentException("Cannot validate a nonexistent monster!");
         }
 
+        if (monster.getElement() == null) {
+            return false;
+        }
+
         if (monster.getElement().equals(ElementType.FIRE)) {
             return true;
         }
@@ -66,15 +70,16 @@ public class BattleEngine {
         if (monster == null) {
             throw new IllegalArgumentException("Cannot validate a nonexistent monster!");
         }
-        if (!validateStats(monster) || !validateElement(monster)) {
+        if (!validateStats(monster)) {
             monster.setAttack(62);
             monster.setDefense(62);
             monster.setHealth(62);
             monster.setSpeed(62);
+        }
 
-            if (monster.getElement() == null) {
-                monster.setElement(ElementType.FIRE);
-            }
+        if (!validateElement(monster) || monster.getElement() == null) {
+            monster.setElement(ElementType.FIRE);
+            System.out.println(monster.getElement());
         }
     }
 
@@ -87,7 +92,31 @@ public class BattleEngine {
         }
         correctStats(monster1);
         correctStats(monster2);
-        Monster winner;
+        Monster winner = null;
+        int turn = (int) ((Math.random() * 9) + 1);
+
+        System.out.println(monster1.getName() + " wants to fight!");
+        System.out.println(monster2.getName() + " wants to fight!");
+        while (winner == null) {
+            displayStatus(monster1, monster2);
+            if (turn % 2 == 1) { // monster1 turn
+                if (monster1.getHealth() <= 0) {
+                    System.out.println(monster1.getName() + " has fainted!");
+                    return monster2;
+                }
+                monster1.attack(monster2);
+                turn = 2;
+            } else {
+                if (monster2.getHealth() <= 0) {
+                    System.out.println(monster2.getName() + " has fainted!");
+                    return monster1;
+                }
+                monster2.attack(monster1);
+                turn = 1;
+            }
+        }
+
+        return winner;
     }
 
     // to-do: displayStatus
