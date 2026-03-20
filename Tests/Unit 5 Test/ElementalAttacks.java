@@ -69,8 +69,8 @@ public interface ElementalAttacks {
         if (didAttackCrit(critMultiplier)) {
             critMultiplier = 2;
         }
-        int totalDmg =
-                (int) (10 * (atk / oppDef) * STAB * effectivenessMultiplier * critMultiplier);
+        int totalDmg = (int) (10.0 * ((double) atk / oppDef) * STAB * effectivenessMultiplier
+                * critMultiplier);
 
         opponent.takeDamage(totalDmg);
         if (opponent.getHealth() < 0) {
@@ -126,7 +126,6 @@ public interface ElementalAttacks {
             return true;
         return Math.random() < (speed / 250.0);
     }
-
 
     /**
      * Returns true if attackType is super effective against defenderType. Fire->Air, Air->Earth,

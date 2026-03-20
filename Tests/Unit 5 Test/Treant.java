@@ -12,6 +12,6 @@ public class Treant extends Monster {
 
     // methods
     public String victoryNoise() {
-        return name + " rumbles with joy!";
+        return name + " rustles with joy!";
     }
 }

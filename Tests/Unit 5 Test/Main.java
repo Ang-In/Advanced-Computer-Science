@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Main {
 
     /**
-     * Return an ArrayList of monsters for automated testing.
+     * Return an ArrayList of monsters for automated testing. 
      * Populate this with your created monsters (e.g. Chimera, custom subclasses).
      */
     public static ArrayList<Monster> getMonstersForTest() {
@@ -11,6 +11,8 @@ public class Main {
         ArrayList<Monster> list = new ArrayList<>();
         list.add(new Chimera());
         list.add(new Treant());
+        list.add(new Chimera("Ember"));
+        list.add(new Treant("Leaf"));
 
         return list;
     }
@@ -19,9 +21,10 @@ public class Main {
 
         // Run a tournament using monsters from getMonstersForTest():
         ArrayList<Monster> monsters = getMonstersForTest();
-        Monster winner = BattleEngine.startBattle(monsters.get(0), monsters.get(1));
+        // Monster winner = BattleEngine.startBattle(monsters.get(1), monsters.get(3));
+        Monster winner = BattleEngine.startTourney(monsters);
 
         System.out.println("Winner: " + (winner != null ? winner.getName() : "None"));
-        
+
     }
 }

@@ -70,16 +70,16 @@ public class BattleEngine {
         if (monster == null) {
             throw new IllegalArgumentException("Cannot validate a nonexistent monster!");
         }
+
+        if (!validateElement(monster)) {
+            monster.setElement(ElementType.FIRE);
+        }
+
         if (!validateStats(monster)) {
             monster.setAttack(62);
             monster.setDefense(62);
             monster.setHealth(62);
             monster.setSpeed(62);
-        }
-
-        if (!validateElement(monster) || monster.getElement() == null) {
-            monster.setElement(ElementType.FIRE);
-            System.out.println(monster.getElement());
         }
     }
 
@@ -102,21 +102,71 @@ public class BattleEngine {
             if (turn % 2 == 1) { // monster1 turn
                 if (monster1.getHealth() <= 0) {
                     System.out.println(monster1.getName() + " has fainted!");
-                    return monster2;
+                    winner = monster2;
+                    break;
                 }
                 monster1.attack(monster2);
                 turn = 2;
             } else {
                 if (monster2.getHealth() <= 0) {
                     System.out.println(monster2.getName() + " has fainted!");
-                    return monster1;
+                    winner = monster1;
+                    break;
                 }
                 monster2.attack(monster1);
                 turn = 1;
             }
         }
 
+        System.out.println(winner.victoryNoise());
         return winner;
+    }
+
+    // last-monster-standing tournament
+    public static Monster startTourney(ArrayList<Monster> list) {
+        if (list == null || list.isEmpty()) {
+            throw new IllegalArgumentException("Cannot start a tourney with nonexistent monsters!");
+        }
+
+        // filter for valid monsters
+        ArrayList<Monster> fighters = new ArrayList<Monster>();
+        for (Monster monster : list) {
+            if (monster == null) {
+                continue;
+            }
+            fighters.add(monster);
+        }
+
+        if (fighters.isEmpty()) {
+            System.out.println("No valid monsters - No winner!");
+            return null;
+        }
+
+        // running the tourney
+        Monster victor = fighters.get(0);
+        int round = 1;
+        while (fighters.size() > 1) {
+            Monster challenger = fighters.get((fighters.indexOf(victor)) + 1);
+            // test later to ensure functionality of challenger index
+            int victorHP = victor.getHealth(); // to heal back to max hp later
+            int challengerHP = challenger.getHealth();
+            System.out.println(
+                    "\nRound " + round + ": " + victor.getName() + " vs. " + challenger.getName());
+            Monster roundWinner = startBattle(victor, challenger);
+            if (roundWinner.equals(victor)) {
+                System.out.println(challenger.getName() + " has been eliminated.");
+                fighters.remove(challenger);
+                victor.setHealth(victorHP);
+            } else {
+                System.out.println(victor.getName() + " has been eliminated.");
+                fighters.remove(victor);
+                challenger.setHealth(challengerHP);
+                victor = challenger;
+            }
+            round++;
+        }
+
+        return victor;
     }
 
     // to-do: displayStatus
