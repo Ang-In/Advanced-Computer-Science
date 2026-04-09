@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Main {
 
     /**
-     * Return an ArrayList of monsters for automated testing. 
-     * Populate this with your created monsters (e.g. Chimera, custom subclasses).
+     * Return an ArrayList of monsters for automated testing. Populate this with your created
+     * monsters (e.g. Chimera, custom subclasses).
      */
     public static ArrayList<Monster> getMonstersForTest() {
 
