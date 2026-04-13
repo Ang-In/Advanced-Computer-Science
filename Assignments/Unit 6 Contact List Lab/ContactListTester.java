@@ -2,12 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ContactListTester {
-    public static void main(String args[]) {
-
-
+    public static void main(String[] args) {
         // A list of unsorted names
-        ArrayList<String> names = new ArrayList<String>(
-                Arrays.asList("Alice", "Tommy", "Bobby", "Annabelle", "Samantha", "Samuel", "Alice"));
+        ArrayList<String> names = new ArrayList<String>(Arrays.asList("Alice", "Tommy", "Bobby",
+                "Annabelle", "Samantha", "Samuel", "Alice"));
 
 
         // initializing a contact list
@@ -22,11 +20,12 @@ public class ContactListTester {
         }
 
 
-        // Current contact list should be 
+        // Current contact list should be
         // Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]
 
 
-        if(contactList.toString().equals("Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]")) {
+        if (contactList.toString()
+                .equals("Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]")) {
             System.out.println("=== Adding Names PASSED! === \n");
         } else {
             System.out.println("=== Adding Names FAILED! === \n");
@@ -63,7 +62,7 @@ public class ContactListTester {
         // Final contact list should be
         // Contact List: [Samuel, Xena]
 
-        if(contactList.toString().equals("Contact List: [Samuel, Xena]")) {
+        if (contactList.toString().equals("Contact List: [Samuel, Xena]")) {
             System.out.println("=== Removing Names PASSED! === \n");
         } else {
             System.out.println("=== Removing Names FAILED! === \n");
