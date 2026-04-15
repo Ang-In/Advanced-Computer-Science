@@ -9,6 +9,7 @@ public class Word {
             throw new IllegalArgumentException("Cannot set a word to nothing!");
         }
         this.originalWord = originalWord;
+        this.sortedWord = sortWord();
     }
 
     // getters
@@ -20,26 +21,50 @@ public class Word {
         return sortedWord;
     }
 
+    // inherited methods
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Word)) {
+            throw new IllegalArgumentException(
+                    "Cannot compare a Word to a different kind of object!");
+        }
+
+        Word otherWord = (Word) other;
+        if (this.originalWord.equals(otherWord.originalWord)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return originalWord;
+    }
+
     // methods
     public String sortWord() {
         String sortedWord = "";
-        String compareWord = originalWord.toLowerCase();
+        char[] compareChars = originalWord.toLowerCase().toCharArray();
         for (int i = 0; i < originalWord.length() - 1; i++) {
-            char smallest = compareWord.charAt(i);
-            int swapIndex = -1;
+            char smallest = compareChars[i];
+            int swapIndex = i;
 
-            for(int j = 1; j < originalWord.length(); j++){
-                if(smallest >= compareWord.charAt(j)){
-                    smallest = compareWord.charAt(j);
+            for (int j = i; j < originalWord.length(); j++) {
+                if (smallest > compareChars[j]) {
+                    smallest = compareChars[j];
+                    swapIndex = j;
                 }
             }
 
-            char temp = compareWord.charAt(i);
-            compareWord. = arr[min_idx];
-            arr[min_idx] = temp;
+            char temp = compareChars[i];
+            compareChars[i] = smallest;
+            compareChars[swapIndex] = temp;
         }
 
-        this.sortedWord = sortedWord;
+        for (int i = 0; i < compareChars.length; i++) {
+            sortedWord += compareChars[i];
+        }
+
         return sortedWord;
     }
 }
