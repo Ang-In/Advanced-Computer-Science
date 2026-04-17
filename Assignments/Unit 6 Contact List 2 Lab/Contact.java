@@ -57,42 +57,77 @@ public class Contact implements Comparable {
     // inherited methods
     @Override
     public int compareTo(Object o) {
-        // TODO Auto-generated method stub
-        return 0;
+        if (!(o instanceof Contact)) {
+            throw new IllegalArgumentException(
+                    "Cannot compare a contact to a different type of object!");
+        }
+
+        Contact other = (Contact) o;
+        int firstComp = this.firstName.compareTo(other.firstName);
+        int secondComp = this.lastName.compareTo(other.lastName);
+        int lastComp = this.telephoneNumber.compareTo(other.telephoneNumber);
+        int comparison = (firstComp == 0) ? (secondComp == 0) ? lastComp : secondComp : firstComp;
+
+        return comparison;
+    }
+
+    public int compareToLastName(Object o) {
+        if (!(o instanceof Contact)) {
+            throw new IllegalArgumentException(
+                    "Cannot compare a contact to a different type of object!");
+        }
+
+        Contact other = (Contact) o;
+        int firstComp = this.lastName.compareTo(other.lastName);
+        int secondComp = this.firstName.compareTo(other.firstName);
+        int lastComp = this.telephoneNumber.compareTo(other.telephoneNumber);
+        int comparison = (firstComp == 0) ? (secondComp == 0) ? lastComp : secondComp : firstComp;
+
+        return comparison;
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return super.equals(obj);
+        int comparison = compareTo(obj);
+        boolean equal = (comparison == 0) ? true : false;
+        return equal;
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        String output = "";
+        output += firstName + " " + lastName + ": " + telephoneNumber;
+        return output;
     }
 
     // methods
 
     public String validateTelephoneNumber(String telephoneNumber) {
-        if (telephoneNumber.length() != 10) {
+        if (telephoneNumber == null) {
+            throw new IllegalArgumentException("Cannot validate a nonexistent telephone number!");
+        }
+        if (telephoneNumber.length() != 12) {
             throw new IllegalArgumentException("Invalid Telephone Number - Incorrect Length!");
         }
 
-        String validated = "";
         char[] telephoneDigits = telephoneNumber.toCharArray();
         for (int i = 0; i < telephoneDigits.length; i++) {
-            if (telephoneDigits[i] < 48 || telephoneDigits[i] > 57) {
-                throw new IllegalArgumentException(
-                        "Invalid Telephone Number - Must be numbers (0-9) only!");
+            boolean dashCheck = false;
+            if (i == 3 || i == 7) {
+                dashCheck = true;
             }
-            validated += telephoneDigits[i];
-            if (i == 2 || i == 5) {
-                validated += "-";
+
+            if (dashCheck && telephoneDigits[i] != '-') {
+                throw new IllegalArgumentException(
+                        "Invalid Telephone Number - must be in 'xxx-xxx-xxxx' format! (Dash)");
+            } else if (dashCheck) {
+                continue;
+            } else if (telephoneDigits[i] < 48 || telephoneDigits[i] > 57) {
+                throw new IllegalArgumentException(
+                        "Invalid Telephone Number - must be in 'xxx-xxx-xxxx' format! (Digit)");
             }
         }
 
-        return validated;
+        return telephoneNumber;
     }
 }

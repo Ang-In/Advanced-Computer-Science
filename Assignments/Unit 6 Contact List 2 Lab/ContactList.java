@@ -1,27 +1,192 @@
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ContactList extends AbstractList {
 
     // instance variables
-    private ArrayList<String> contactList;
+    private ArrayList<Contact> contactList;
 
     // constructors
     public ContactList() {
-        contactList = new ArrayList<String>();
+        contactList = new ArrayList<Contact>();
+    }
+
+    // inherited methods
+    /** returns a String containing all of the words in list */
+    public String toString() {
+        return "Contact List: " + contactList.toString();
+    }
+
+    // get(int index)
+    /** returns the name at the specified index */
+    public Contact get(int index) {
+        if (contactList == null || index >= contactList.size()) {
+            throw new IllegalArgumentException("Invalid Index!");
+        }
+        return contactList.get(index);
+    }
+
+    // size()
+    /** returns the number of names in the contact list */
+    public int size() {
+        if (contactList == null) {
+            throw new IllegalArgumentException("Cannot return the size of a nonexistent list!");
+        }
+        return contactList.size();
     }
 
     // methods
-    // findInsertLocation(String name)
+    // add(String name)
     /**
-     * returns the location in the contact list where the name should go to keep the list
-     * alphabetized
+     * adds a contact to the contact list so that the list remains alphabetized, it prints out which
+     * name is being added, also the method prevents duplicate names from being added
      */
-    private int findInsertLocation(String name) {
+    public boolean add(Contact contact) {
+        if (contact == null) {
+            throw new IllegalArgumentException("Cannot add a nonexistent contact!");
+        }
+
+        System.out.println("+ Adding " + contact.getFirstName());
+        if (searchContacts(contact.getTelephoneNumber()) != null) {
+            return false;
+        }
+
+        int location = findAddLocation(contact);
+        if (contactList.isEmpty()) {
+            contactList.add(contact);
+            return true;
+        } else {
+            contactList.add(location, contact);
+            return true;
+        }
+
+    }
+
+    // remove(String name)
+    /* removes a contact from the contact list and keeps list alphabetized */
+    public boolean remove(Contact contact) {
+        if (contact == null) {
+            throw new IllegalArgumentException("Cannot remove a nonexistent contact!");
+        }
+
+        System.out.println("- Removing " + contact.getFirstName());
+        if (contactList.isEmpty() || searchContacts(contact.getTelephoneNumber()) == null) {
+            return false;
+        }
+
+        int location = findRemoveLocation(contact);
+        if (location == -1) {
+            return false;
+        } else {
+            contactList.remove(location);
+            return true;
+        }
+    }
+
+    public void sortByFirstName() {
+        if (contactList != null) {
+            Collections.sort(contactList);
+        }
+    }
+
+    public void sortByLastName() {
+        // Uses Selection Sort
+        if (contactList != null) {
+            for (int i = 0; i < contactList.size(); i++) {
+                Contact sorting = contactList.get(i);
+                int swapIndex = i;
+                for (int j = i; j < contactList.size() - 1; j++) {
+                    if (sorting.compareTo(contactList.get(i)) > 0) {
+                        sorting = contactList.get(j);
+                        swapIndex = j;
+                    }
+                }
+
+                Contact temp = contactList.get(i);
+                contactList.add(i, sorting);
+                contactList.remove(swapIndex);
+                contactList.add(swapIndex, temp);
+            }
+        }
+    }
+
+    public void sortByTelephoneNumber() {
+        // Uses Insertion Sort
+        if (contactList != null) {
+            for (int i = 1; i < contactList.size(); i++) {
+                Contact key = contactList.get(i);
+                int j = i - 1;
+
+                while (j >= 0 && key.compareTo(contactList.get(j).getTelephoneNumber()) > 0) {
+                    contactList.add(j + 1, contactList.get(j));
+                    j -= 1;
+                }
+                contactList.add(j + 1, key);
+            }
+        }
+    }
+
+    // clear()
+    /** removes all names from the contact list */
+    public void clear() {
+        System.out.println("Clearing the contact list");
+        contactList = new ArrayList<Contact>();
+    }
+
+    public Contact searchContacts(String telephoneNumber) {
+        if (contactList == null || contactList.size() == 0) {
+            return null;
+        }
+        if (telephoneNumber == null) {
+            throw new IllegalArgumentException(
+                    "Cannot find contact with a nonexistent phone number!");
+        }
+
+        int prevSorter = 0;
+        int left = 0;
+        int right = contactList.size();
+        Contact result = null;
+
+        while (left < right) {
+            int midIndex = (left + right) / 2;
+            String curNum = contactList.get(midIndex).getTelephoneNumber();
+            int sorter = telephoneNumber.compareTo(curNum);
+            if (sorter == 0) {
+                result = contactList.get(midIndex);
+                break;
+            } else if (sorter < 0) {
+                if (prevSorter > 0) {
+                    left = midIndex;
+                    continue;
+                } else if (right - left == 1) {
+                    break;
+                } else {
+                    right = midIndex;
+                    continue;
+                }
+            } else if (sorter > 0) {
+                if (prevSorter < 0) {
+                    right = midIndex;
+                    continue;
+                } else if (right - left == 1) {
+                    break;
+                } else {
+                    left = midIndex;
+                    continue;
+                }
+            }
+            prevSorter = sorter;
+        }
+
+        return result;
+    }
+
+    // helper method: search
+    protected int findAddLocation(Contact contact) {
         // You can use a sequential search here. But for a Stretch Challenge, try to do
         // a binary search.
-
-        if (contactList == null) {
+        if (contactList == null || contact == null) {
             return -1;
         }
         if (contactList.size() == 0) {
@@ -35,10 +200,8 @@ public class ContactList extends AbstractList {
 
         while (left < right) {
             int midIndex = (left + right) / 2;
-            int sorter = name.compareTo(contactList.get(midIndex));
-            if (sorter == 0) {
-                break;
-            } else if (sorter < 0) {
+            int sorter = contact.compareTo(contactList.get(midIndex));
+            if (sorter < 0) {
                 if (prevSorter > 0) {
                     location = midIndex;
                     break;
@@ -67,9 +230,14 @@ public class ContactList extends AbstractList {
         return location;
     }
 
-    private int findName(String name) {
-        if (contactList == null || contactList.size() == 0) {
+    protected int findRemoveLocation(Contact contact) {
+        // You can use a sequential search here. But for a Stretch Challenge, try to do
+        // a binary search.
+        if (contactList == null || contact == null) {
             return -1;
+        }
+        if (contactList.size() == 0) {
+            return 0;
         }
 
         int prevSorter = 0;
@@ -79,16 +247,15 @@ public class ContactList extends AbstractList {
 
         while (left < right) {
             int midIndex = (left + right) / 2;
-            String curWord = contactList.get(midIndex);
-            int sorter = name.compareTo(curWord);
+            int sorter = contact.compareTo(contactList.get(midIndex));
             if (sorter == 0) {
                 location = midIndex;
-                break;
             } else if (sorter < 0) {
                 if (prevSorter > 0) {
                     left = midIndex;
                     continue;
                 } else if (right - left == 1) {
+                    location = 0;
                     break;
                 } else {
                     right = midIndex;
@@ -96,9 +263,10 @@ public class ContactList extends AbstractList {
                 }
             } else if (sorter > 0) {
                 if (prevSorter < 0) {
-                    right = midIndex;
+                    right = midIndex + 1;
                     continue;
                 } else if (right - left == 1) {
+                    location = right;
                     break;
                 } else {
                     left = midIndex;
@@ -110,103 +278,4 @@ public class ContactList extends AbstractList {
 
         return location;
     }
-
-    // add(String name)
-    /**
-     * adds a name to the contact list so that the list remains alphabetized, it prints out which
-     * name is being added, also the method prevents duplicate names from being added
-     */
-    public boolean add(String name) {
-        System.out.println("+ Adding " + name);
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Cannot add a nonexistent name!");
-        }
-
-        int location = findInsertLocation(name);
-        if (location < 0) {
-            return false;
-        } else if (contactList.isEmpty()) {
-            contactList.add(name);
-            return true;
-        } else {
-            contactList.add(location, name);
-            return true;
-        }
-
-    }
-
-    // add(ArrayList<String> names)
-    /* this method adds a list of names to the contact list */
-    public void add(ArrayList<String> names) {
-        if (names == null) {
-            throw new IllegalArgumentException("Cannot add a nonexistent list of names!");
-        }
-
-        for (String name : names) {
-            add(name);
-        }
-    }
-
-    // remove(String name)
-    /* removes a name from the contact list and keeps list alphabetized */
-    public boolean remove(String name) {
-        System.out.println("- Removing " + name);
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Cannot add a nonexistent name!");
-        }
-        if (contactList.isEmpty()) {
-            return false;
-        }
-
-        int location = findName(name);
-        if (location == -1) {
-            return false;
-        } else {
-            contactList.remove(location);
-            return true;
-        }
-    }
-
-    // remove(ArrayList<String> names)
-    /* this method removes a list of names from the contact list */
-    public void remove(ArrayList<String> names) {
-        if (names == null) {
-            throw new IllegalArgumentException("Cannot remove a nonexistent list of names!");
-        }
-
-        for (String name : names) {
-            remove(name);
-        }
-    }
-
-    /** returns a String containing all of the words in list */
-    public String toString() {
-        return "Contact List: " + contactList.toString();
-    }
-
-    // get(int index)
-    /** returns the name at the specified index */
-    public String get(int index) {
-        if (contactList == null || index >= contactList.size()) {
-            throw new IllegalArgumentException("Invalid Index!");
-        }
-        return contactList.get(index);
-    }
-
-    // size()
-    /** returns the number of names in the contact list */
-    public int size() {
-        if (contactList == null) {
-            throw new IllegalArgumentException("Cannot return the size of a nonexistent list!");
-        }
-        return contactList.size();
-    }
-
-    // clear()
-    /** removes all names from the contact list */
-    public void clear() {
-        System.out.println("Clearing the contact list");
-        contactList = new ArrayList<String>();
-    }
-
 }
