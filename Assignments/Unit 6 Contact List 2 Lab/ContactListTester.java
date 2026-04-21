@@ -7,16 +7,16 @@ public class ContactListTester {
         Contact alice = new Contact("Alice", "Berenstein", "919-001-8738");
         System.out.println(alice);
 
-        Contact annabelle = new Contact("Annabelle", "Granger", "7278189296");
-        Contact bobby = new Contact("Bobby", "Karlson", "4017788292");
-        Contact fred = new Contact("Fred", "Fernandez", "3234518920");
-        Contact samuel = new Contact("Samuel", "Micheal", "8883330001");
-        Contact samantha = new Contact("Samantha", "Sonny", "8888888888");
-        Contact tommy = new Contact("Tommy", "Bear", "6132501003");
+        Contact annabelle = new Contact("Annabelle", "Granger", "727-818-9296");
+        Contact bobby = new Contact("Bobby", "Karlson", "401-778-8292");
+        Contact fred = new Contact("Fred", "Fernandez", "323-451-8920");
+        Contact samuel = new Contact("Samuel", "Micheal", "888-333-0001");
+        Contact samantha = new Contact("Samantha", "Sonny", "888-888-8888");
+        Contact tommy = new Contact("Tommy", "Bear", "613-250-1003");
         Contact xena = null;
 
-        ArrayList<Contact> test = new ArrayList<Contact>(Arrays.asList(alice, tommy, bobby,
-                annabelle, samantha, samuel, alice));
+        ArrayList<Contact> test = new ArrayList<Contact>(
+                Arrays.asList(alice, tommy, bobby, annabelle, samantha, samuel, alice));
 
         // initializing a contact list
         ContactList contactList = new ContactList();
@@ -34,12 +34,12 @@ public class ContactListTester {
         // Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]
 
 
-        /*if (contactList.toString()
-                .equals("Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]")) {
-            System.out.println("=== Adding Names PASSED! === \n");
-        } else {
-            System.out.println("=== Adding Names FAILED! === \n");
-        }*/
+        /*
+         * if (contactList.toString()
+         * .equals("Contact List: [Alice, Annabelle, Bobby, Samantha, Samuel, Tommy]")) {
+         * System.out.println("=== Adding Names PASSED! === \n"); } else {
+         * System.out.println("=== Adding Names FAILED! === \n"); }
+         */
 
 
         System.out.println("=== Testing Removing Names ===");
@@ -72,11 +72,11 @@ public class ContactListTester {
         // Final contact list should be
         // Contact List: [Samuel, Xena]
 
-        /*if (contactList.toString().equals("Contact List: [Samuel, Xena]")) {
-            System.out.println("=== Removing Names PASSED! === \n");
-        } else {
-            System.out.println("=== Removing Names FAILED! === \n");
-        }*/
+        /*
+         * if (contactList.toString().equals("Contact List: [Samuel, Xena]")) {
+         * System.out.println("=== Removing Names PASSED! === \n"); } else {
+         * System.out.println("=== Removing Names FAILED! === \n"); }
+         */
     }
 }
 

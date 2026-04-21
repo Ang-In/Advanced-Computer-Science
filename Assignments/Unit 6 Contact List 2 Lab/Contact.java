@@ -47,11 +47,11 @@ public class Contact implements Comparable {
         this.lastName = lastName;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        if (telephoneNumber == null || telephoneNumber.isEmpty()) {
+    public void setTelephoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
             throw new IllegalArgumentException("Cannot set telephone number to nothing!");
         }
-        this.telephoneNumber = validateTelephoneNumber(telephoneNumber);
+        this.telephoneNumber = validateTelephoneNumber(phoneNumber);
     }
 
     // inherited methods
@@ -102,15 +102,15 @@ public class Contact implements Comparable {
 
     // methods
 
-    public String validateTelephoneNumber(String telephoneNumber) {
-        if (telephoneNumber == null) {
+    public String validateTelephoneNumber(String phoneNumber) {
+        if (phoneNumber == null) {
             throw new IllegalArgumentException("Cannot validate a nonexistent telephone number!");
         }
-        if (telephoneNumber.length() != 12) {
+        if (phoneNumber.length() != 12) {
             throw new IllegalArgumentException("Invalid Telephone Number - Incorrect Length!");
         }
 
-        char[] telephoneDigits = telephoneNumber.toCharArray();
+        char[] telephoneDigits = phoneNumber.toCharArray();
         for (int i = 0; i < telephoneDigits.length; i++) {
             boolean dashCheck = false;
             if (i == 3 || i == 7) {
@@ -128,6 +128,6 @@ public class Contact implements Comparable {
             }
         }
 
-        return telephoneNumber;
+        return phoneNumber;
     }
 }
