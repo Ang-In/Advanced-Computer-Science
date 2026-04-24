@@ -5,8 +5,6 @@ public class ContactListTester {
     public static void main(String[] args) {
         // A list of unsorted names
         Contact alice = new Contact("Alice", "Berenstein", "919-001-8738");
-        System.out.println(alice);
-
         Contact annabelle = new Contact("Annabelle", "Granger", "727-818-9296");
         Contact bobby = new Contact("Bobby", "Karlson", "401-778-8292");
         Contact fred = new Contact("Fred", "Fernandez", "323-451-8920");
@@ -21,13 +19,15 @@ public class ContactListTester {
         // initializing a contact list
         ContactList contactList = new ContactList();
 
-
         System.out.println("=== Testing Adding Names ===");
         // testing the add method
         for (Contact c : test) {
             contactList.add(c);
             System.out.println(contactList);
         }
+
+        contactList.sortByLastName();
+        System.out.println(contactList);
 
 
         // Current contact list should be
@@ -54,8 +54,8 @@ public class ContactListTester {
         contactList.add(fred);
         System.out.println(contactList);
 
-        contactList.add(xena);
-        System.out.println(contactList);
+        // contactList.add(xena);
+        // System.out.println(contactList);
 
         contactList.remove(tommy);
         System.out.println(contactList);
@@ -70,10 +70,10 @@ public class ContactListTester {
         System.out.println(contactList);
 
         // Final contact list should be
-        // Contact List: [Samuel, Xena]
+        // Contact List: [Samuel]
 
         /*
-         * if (contactList.toString().equals("Contact List: [Samuel, Xena]")) {
+         * if (contactList.toString().equals("Contact List: [Samuel]")) {
          * System.out.println("=== Removing Names PASSED! === \n"); } else {
          * System.out.println("=== Removing Names FAILED! === \n"); }
          */

@@ -78,12 +78,16 @@ public class Contact implements Comparable {
         }
 
         Contact other = (Contact) o;
-        int firstComp = this.lastName.compareTo(other.lastName);
-        int secondComp = this.firstName.compareTo(other.firstName);
-        int lastComp = this.telephoneNumber.compareTo(other.telephoneNumber);
-        int comparison = (firstComp == 0) ? (secondComp == 0) ? lastComp : secondComp : firstComp;
+        // int firstComp = this.lastName.compareTo(other.lastName);
+        // int secondComp = this.firstName.compareTo(other.firstName);
+        // int lastComp = this.telephoneNumber.compareTo(other.telephoneNumber);
+        // int comparison = (firstComp == 0) ? (secondComp == 0) ? lastComp : secondComp : firstComp;
+        // ternary: if condiion ? false result : true result
 
-        return comparison;
+        String me = this.lastName + " " + this.firstName + " " + this.telephoneNumber;
+        String ot = other.getLastName() + " " + other.getFirstName() + " " + other.getTelephoneNumber();
+
+        return ot.compareTo(me);
     }
 
     @Override

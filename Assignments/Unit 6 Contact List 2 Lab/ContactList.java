@@ -52,7 +52,7 @@ public class ContactList extends AbstractList {
          * if (searchContacts(contact.getTelephoneNumber()) != null) { return false; }
          */
 
-        int location = findAddLocation(contact);
+        int location = findAddLocation(contact); // mark
         if (contactList.isEmpty()) {
             contactList.add(contact);
             return true;
@@ -80,7 +80,7 @@ public class ContactList extends AbstractList {
          * if (searchContacts(contact.getTelephoneNumber()) != null) { return false; }
          */
 
-        int location = findRemoveLocation(contact);
+        int location = findRemoveLocation(contact); // mark
         if (location == -1) {
             return false;
         } else {
@@ -93,26 +93,30 @@ public class ContactList extends AbstractList {
         if (contactList != null) {
             Collections.sort(contactList);
         }
-    }
+    } // mark
 
     public void sortByLastName() {
         // Uses Selection Sort
+        int size = contactList.size(); // ERROR IS HERE
         if (contactList != null) {
-            for (int i = 0; i < contactList.size(); i++) {
+            for (int i = 0; i < size; i++) { // this for loop does not work
                 Contact sorting = contactList.get(i);
                 int swapIndex = i;
                 for (int j = i; j < contactList.size() - 1; j++) {
-                    if (sorting.compareTo(contactList.get(i)) > 0) {
+                    // works fine
+
+                    if (sorting.compareToLastName(contactList.get(i)) > 0) {
                         sorting = contactList.get(j);
                         swapIndex = j;
                     }
                 }
 
                 Contact temp = contactList.get(i);
-                contactList.add(i, sorting);
-                contactList.remove(temp);
-                contactList.add(swapIndex, temp);
+                contactList.set(i, sorting);
+                contactList.set(swapIndex, temp);
             }
+        } else {
+            throw new IllegalArgumentException("Cannot sort a nonexistent list!");
         }
     }
 
@@ -123,12 +127,15 @@ public class ContactList extends AbstractList {
                 Contact key = contactList.get(i);
                 int j = i - 1;
 
-                while (j >= 0 && key.compareTo(contactList.get(j).getTelephoneNumber()) > 0) {
+                while (j >= 0 && key.getTelephoneNumber()
+                        .compareTo(contactList.get(j).getTelephoneNumber()) > 0) {
                     contactList.add(j + 1, contactList.get(j));
-                    j -= 1;
+                    j -= 1; // mark
                 }
                 contactList.add(j + 1, key);
             }
+        } else {
+            throw new IllegalArgumentException("Cannot sort a nonexistent list!");
         }
     }
 
@@ -154,31 +161,35 @@ public class ContactList extends AbstractList {
         int right = contactList.size();
         Contact result = null;
 
-        while (left < right) {
-            int midIndex = (left + right) / 2;
+        while (left < right) { // mark
+            int midIndex = (left + right) / 2; // truncates
             String curNum = contactList.get(midIndex).getTelephoneNumber();
             int sorter = telephoneNumber.compareTo(curNum);
-            if (sorter == 0) {
+            if (sorter == 0) { // equal
                 result = contactList.get(midIndex);
                 break;
-            } else if (sorter < 0) {
+            } else if (sorter < 0) { // our guess is too large
                 if (prevSorter > 0) {
                     left = midIndex;
+                    prevSorter = sorter;
                     continue;
                 } else if (right - left == 1) {
                     break;
                 } else {
                     right = midIndex;
+                    prevSorter = sorter;
                     continue;
                 }
-            } else if (sorter > 0) {
+            } else if (sorter > 0) { // our guess is too small
                 if (prevSorter < 0) {
                     right = midIndex;
+                    prevSorter = sorter;
                     continue;
                 } else if (right - left == 1) {
                     break;
                 } else {
                     left = midIndex;
+                    prevSorter = sorter;
                     continue;
                 }
             }
@@ -204,7 +215,7 @@ public class ContactList extends AbstractList {
         int right = contactList.size();
         int location = -1;
 
-        while (left < right) {
+        while (left < right) { // mark
             int midIndex = (left + right) / 2;
             int sorter = contact.compareTo(contactList.get(midIndex));
             if (sorter == 0) {
@@ -255,7 +266,7 @@ public class ContactList extends AbstractList {
         int right = contactList.size();
         int location = -1;
 
-        while (left < right) {
+        while (left < right) { // mark
             int midIndex = (left + right) / 2;
             int sorter = contact.compareTo(contactList.get(midIndex));
             if (sorter == 0) {
