@@ -97,13 +97,12 @@ public class ContactList extends AbstractList {
 
     public void sortByLastName() {
         // Uses Selection Sort
-        int size = contactList.size(); // ERROR IS HERE
+        int size = contactList.size();
         if (contactList != null) {
-            for (int i = 0; i < size; i++) { // this for loop does not work
+            for (int i = 0; i < size; i++) {
                 Contact sorting = contactList.get(i);
                 int swapIndex = i;
                 for (int j = i; j < contactList.size() - 1; j++) {
-                    // works fine
 
                     if (sorting.compareToLastName(contactList.get(i)) > 0) {
                         sorting = contactList.get(j);

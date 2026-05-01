@@ -6,7 +6,9 @@ public class Unit6Exercises {
      */
     public static int factorial(int n) {
         if (n < 0) {
-            throw new IllegalArgumentException("Cannot obtain the factorial of a negative number!");
+            // throw new IllegalArgumentException("Cannot obtain the factorial of a negative
+            // number!");
+            return 0;
         }
         int factorial = 1;
         for (int i = 1; i <= n; i++) {
@@ -17,7 +19,15 @@ public class Unit6Exercises {
     }
 
     public static int factorialRecursive(int n) {
-        return 0;
+        if (n < 0) {
+            // throw new IllegalArgumentException("Cannot obtain the factorial of a negative
+            // number!");
+            return 0;
+        }
+        if (n == 0) {
+            return 1;
+        }
+        return n * factorialRecursive(n - 1);
     }
 
     /**
@@ -26,7 +36,8 @@ public class Unit6Exercises {
      */
     public static int fibonacci(int n) {
         if (n < 0) {
-            throw new IllegalArgumentException("Negative Fibonacchi numbers do not exist!");
+            // throw new IllegalArgumentException("Negative Fibonacchi numbers do not exist!");
+            return 0;
         }
 
         if (n == 0) {
@@ -35,13 +46,13 @@ public class Unit6Exercises {
             return 1;
         } else {
             int fibonacci = 0;
-            int prevFibonacci = 0;
-            int prev2Fibonacci = 1;
+            int prevFibonacci = 1;
+            int prev2Fibonacci = 0;
 
-            for (int i = 2; i < n; i++) {
+            for (int i = 2; i <= n; i++) {
                 fibonacci = prevFibonacci + prev2Fibonacci;
-                prevFibonacci++;
-                prev2Fibonacci++;
+                prev2Fibonacci = prevFibonacci;
+                prevFibonacci = fibonacci;
             }
 
             return fibonacci;
@@ -50,7 +61,8 @@ public class Unit6Exercises {
 
     public static int fibonacciRecursive(int n) {
         if (n < 0) {
-            throw new IllegalArgumentException("Negative Fibonacchi numbers do not exist!");
+            // throw new IllegalArgumentException("Negative Fibonacchi numbers do not exist!");
+            return 0;
         }
 
         if (n == 0) {
@@ -67,19 +79,25 @@ public class Unit6Exercises {
      * the digits of a given integer.
      */
     public static int sumDigits(int n) {
+        if (n < 0) {
+            return 0;
+        }
+
         int digitCount = ((int) Math.log10(Math.abs(n))) + 1;
         int sum = 0;
+        int step = n;
         for (int i = 0; i < digitCount; i++) {
-            sum += (n % (10 ^ i));
+            sum += step % 10;
+            step /= 10;
         }
         return sum;
     }
 
     public static int sumDigitsRecursive(int n) {
-        if (n == 0) {
+        if (n <= 0) {
             return 0;
         }
-        return (n - (n % 10)) + sumDigitsRecursive(n % 10);
+        return (n % 10) + sumDigitsRecursive(n / 10);
     }
 
     /**
@@ -128,7 +146,7 @@ public class Unit6Exercises {
 
         String reverse = "";
         char[] strArr = str.toLowerCase().toCharArray();
-        for (int i = strArr.length - 1; i > 0; i--) {
+        for (int i = strArr.length - 1; i >= 0; i--) {
             reverse += strArr[i];
         }
 
@@ -153,6 +171,9 @@ public class Unit6Exercises {
      */
     public static int power(int base, int exponent) {
         int exp = base;
+        if (exponent == 0) {
+            return 1;
+        }
         for (int i = 1; i < Math.abs(exponent); i++) {
             exp *= base;
         }
@@ -190,9 +211,13 @@ public class Unit6Exercises {
             throw new IllegalArgumentException("Cannot check a nonexistent string! (Palindrome)");
         }
 
-
-
-        return false;
+        if (str.length() <= 1) {
+            return true;
+        }
+        if (str.toLowerCase().charAt(0) != str.toLowerCase().charAt(str.length() - 1)) {
+            return false;
+        }
+        return isPalindromeRecursive(str.substring(1, str.length() - 1));
     }
 
     /**
@@ -202,6 +227,9 @@ public class Unit6Exercises {
     public static int gcd(int a, int b) {
         int gcd = 1;
         int curDiv = 1;
+        if (a == 0 || b == 0) {
+            return Math.max(Math.abs(a), Math.abs(b));
+        }
         while (curDiv <= Math.min(Math.abs(a), Math.abs(b))) {
             if (a % curDiv == 0 && b % curDiv == 0) {
                 gcd = curDiv;
@@ -213,11 +241,8 @@ public class Unit6Exercises {
     }
 
     public static int gcdRecursive(int a, int b) {
-        if (a == 0) {
-            return b;
-        }
-        if (b == 0) {
-            return a;
+        if (a == 0 || b == 0) {
+            return Math.max(Math.abs(a), Math.abs(b));
         }
         int larger = Math.max(a, b);
         int smaller = Math.min(a, b);
@@ -233,16 +258,37 @@ public class Unit6Exercises {
      */
 
     public static int bunnyEars(int bunnies) {
-
-        for (int i = 0; i < bunnies; i++) {
-
+        if (bunnies < 0) {
+            // throw new IllegalArgumentException("Cannot count nonexistent bunnies' ears!");
+            return 0;
         }
-        return 0;
+        int ears = 0;
+        for (int i = 1; i <= bunnies; i++) {
+            if (i % 2 == 0) {
+                ears += 3;
+            } else {
+                ears += 2;
+            }
+        }
+        return ears;
 
     }
 
     public static int bunnyEarsRecursive(int bunnies) {
-        return 0;
+        if (bunnies < 0) {
+            // throw new IllegalArgumentException("Cannot count nonexistent bunnies' ears!");
+            return 0;
+        }
+
+        if (bunnies == 0) {
+            return 0;
+        }
+
+        if (bunnies % 2 == 0) {
+            return 3 + bunnyEarsRecursive(bunnies - 1);
+        } else {
+            return 2 + bunnyEarsRecursive(bunnies - 1);
+        }
     }
 
     /**
@@ -250,12 +296,62 @@ public class Unit6Exercises {
      * binary search algorithm to find and return the index of a given element in a sorted array.
      */
     public static int binarySearch(int[] arr, int key) {
+        if (arr == null) {
+            throw new IllegalArgumentException("Cannot search in a nonexistent array!");
+        }
+        if (arr.length == 0) {
+            return -1;
+        }
 
-        return -1; // Element not found
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int midIndex = left + ((right - left) / 2);
+            if (arr[midIndex] == key) { // found item
+                return midIndex;
+            }
+            if (arr[midIndex] > key) { // search left
+                /*
+                 * if (right - left == 1) { break; }
+                 */
+                right = midIndex - 1;
+                // continue;
+            }
+            if (arr[midIndex] < key) { // search right
+                /*
+                 * if (right - left == 1) { break; }
+                 */
+                left = midIndex + 1;
+                // continue;
+            }
+        }
+
+        return -1;
     }
 
     public static int binarySearchRecursiveHelper(int[] arr, int key, int low, int high) {
-        return -1;
+        if (arr == null) {
+            throw new IllegalArgumentException("Cannot search in a nonexistent array!");
+        }
+
+        int midIndex = low + ((high - low) / 2);
+        if (arr[midIndex] == key) { // found item
+            return midIndex;
+        }
+        if (arr[midIndex] >= key) { // search left
+            if (high - low == 1) {
+                return -1;
+            }
+            return binarySearchRecursiveHelper(arr, key, low, midIndex);
+        }
+        if (arr[midIndex] <= key) { // search right
+            if (high - low == 1) {
+                return -1;
+            }
+            return binarySearchRecursiveHelper(arr, key, midIndex, high);
+        }
+
+        return -1; // failsafe
     }
 
     // DO NOT EDIT! Work on the helper version above this method. This method is to be used for
