@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cylp703ji8nhj"]
+
+[node name="Main" type="Node2D" unique_id=354487268]
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=438921494]
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=186947564]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.31403208, 0.68487096, 0.36124182, 1)
