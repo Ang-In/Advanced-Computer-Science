@@ -4,4 +4,18 @@
 
 [node name="World" type="Node2D" unique_id=1553036572]
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1048570768]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.5842432, 0.50957066, 1)
+
 [node name="Player" parent="." unique_id=688682386 instance=ExtResource("1_kqs1s")]
