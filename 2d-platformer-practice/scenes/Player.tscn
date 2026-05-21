@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ch643uny1hq8l" path="res://scenes/Player.gd" id="1_0rnld"]
 [ext_resource type="Texture2D" uid="uid://qsqxe4k0eegr" path="res://assets/character/idle/Idle_00.png" id="1_p7iby"]
 [ext_resource type="Texture2D" uid="uid://bpq67jtguwbx8" path="res://assets/character/idle/Idle_01.png" id="2_0rnld"]
+[ext_resource type="PackedScene" uid="uid://b52i8x6ydv2mr" path="res://scenes/Bullet.tscn" id="2_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://duicr7mvkxm68" path="res://assets/character/idle/Idle_02.png" id="3_srp4u"]
 [ext_resource type="Texture2D" uid="uid://cy4oi3o6h1uij" path="res://assets/character/idle/Idle_03.png" id="4_jfpux"]
 [ext_resource type="Texture2D" uid="uid://cp4w814lorgka" path="res://assets/character/idle/Idle_04.png" id="5_61ith"]
@@ -15,6 +16,16 @@
 [ext_resource type="Texture2D" uid="uid://bqr7oo3bkvlef" path="res://assets/character/idle/Idle_11.png" id="12_viqgg"]
 [ext_resource type="Texture2D" uid="uid://b3s8xjhcmjigy" path="res://assets/character/idle/Idle_12.png" id="13_fgkxt"]
 [ext_resource type="Texture2D" uid="uid://yvt8nc3youxx" path="res://assets/character/idle/Idle_13.png" id="14_xsi7p"]
+[ext_resource type="Texture2D" uid="uid://cuent661p5ni4" path="res://assets/character/run/Run_00.png" id="16_viqgg"]
+[ext_resource type="Texture2D" uid="uid://bw0cbdh38h4dw" path="res://assets/character/run/Run_01.png" id="17_fgkxt"]
+[ext_resource type="Texture2D" uid="uid://clsh81yochfnc" path="res://assets/character/run/Run_02.png" id="18_xsi7p"]
+[ext_resource type="Texture2D" uid="uid://3fbgery6ilw" path="res://assets/character/run/Run_03.png" id="19_1jpwa"]
+[ext_resource type="Texture2D" uid="uid://jngk44b18yn4" path="res://assets/character/run/Run_04.png" id="20_pfeki"]
+[ext_resource type="Texture2D" uid="uid://cwlv5jksx8u23" path="res://assets/character/run/Run_05.png" id="21_axnmu"]
+[ext_resource type="Texture2D" uid="uid://crc8qwpsuuonk" path="res://assets/character/run/Run_06.png" id="22_fvsjc"]
+[ext_resource type="Texture2D" uid="uid://jkins23nlyxb" path="res://assets/character/run/Run_07.png" id="23_hxdpb"]
+[ext_resource type="Texture2D" uid="uid://eus53jkyrhbj" path="res://assets/character/run/Run_08.png" id="24_agngo"]
+[ext_resource type="Texture2D" uid="uid://bnjcw12t6apgp" path="res://assets/character/run/Run_09.png" id="25_qrixf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1jpwa"]
 animations = [{
@@ -63,19 +74,55 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 7.0
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_viqgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fgkxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_xsi7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_1jpwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pfeki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_axnmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_fvsjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_hxdpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_agngo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_qrixf")
+}],
+"loop": true,
+"name": &"run",
+"speed": 18.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfeki"]
-radius = 20.0
-height = 100.0
+radius = 40.0
+height = 185.0
 
 [node name="Player" type="CharacterBody2D" unique_id=688682386]
 script = ExtResource("1_0rnld")
 speed = 300.0
+bullet_scene = ExtResource("2_fgkxt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1925684155]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_1jpwa")
 animation = &"idle"
 autoplay = "idle"
@@ -85,3 +132,6 @@ scale = Vector2(0.6, 0.6)
 shape = SubResource("CapsuleShape2D_pfeki")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=135374627]
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1461752810]
+position = Vector2(30, 25)

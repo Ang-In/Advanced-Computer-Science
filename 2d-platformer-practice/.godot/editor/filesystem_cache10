@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1779220849
+::res://::1779376034
 icon.svg::CompressedTexture2D::6486347427135157427::1779219150::1779219179::1::::<><><>0<>0<>27a4da824c4e25e3dd9d174979afedf8<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://assets/::1779219515
 ::res://assets/audio/::1779219509
@@ -58,7 +58,9 @@ Walk_13.png::CompressedTexture2D::2965595829611618833::1778878195::1779219474::1
 Box.png::CompressedTexture2D::6988939048306288618::1778878195::1779219474::1::::<><><>0<>0<>377e50a3d6e2f7a4e5f105ce3852972d<>res://.godot/imported/Box.png-e850931c45025d1c6af5a630282740c4.ctex::
 ExitDoor.png::CompressedTexture2D::2247640544918910707::1778878195::1779219474::1::::<><><>0<>0<>c0d025b03bc8de9077b87b6a31f39d77<>res://.godot/imported/ExitDoor.png-b04afe0012ef88572385767d20ec382d.ctex::
 Grass1.png::CompressedTexture2D::1479863322448037512::1778878195::1779219474::1::::<><><>0<>0<>86bb4ed941a2fbabcfaaa2f02fc7eaea<>res://.godot/imported/Grass1.png-30a04a88466169a91f1cf1ca2c6c11fb.ctex::
-::res://scenes/::1779220849
-main.tscn::PackedScene::6481051027049289555::1779220361::0::1::::<><><>0<>0<><>::
-Player.tscn::PackedScene::7344204078259592082::1779220829::0::1::::<><><>0<>0<><>::
+::res://scenes/::1779223206
+Main.tscn::PackedScene::6481051027049289555::1779220361::0::1::::<><><>0<>0<><>::
+Player.gd::GDScript::5329970849922796357::1779223173::0::1::::Player<>CharacterBody2D<><>0<>0<><>::
+Player.tscn::PackedScene::7344204078259592082::1779223197::0::1::::<><><>0<>0<><>::uid://ch643uny1hq8l::::res://scenes/Player.gd<>uid://qsqxe4k0eegr::::res://assets/character/idle/Idle_00.png<>uid://bpq67jtguwbx8::::res://assets/character/idle/Idle_01.png<>uid://duicr7mvkxm68::::res://assets/character/idle/Idle_02.png<>uid://cy4oi3o6h1uij::::res://assets/character/idle/Idle_03.png<>uid://cp4w814lorgka::::res://assets/character/idle/Idle_04.png<>uid://baung642hnrbt::::res://assets/character/idle/Idle_05.png<>uid://cgrqafg0mipio::::res://assets/character/idle/Idle_06.png<>uid://7wrfdu1ckbck::::res://assets/character/idle/Idle_07.png<>uid://mes8et8n0f7d::::res://assets/character/idle/Idle_08.png<>uid://cgpm73qsw1qr::::res://assets/character/idle/Idle_09.png<>uid://b4rlosf2urlh5::::res://assets/character/idle/Idle_10.png<>uid://bqr7oo3bkvlef::::res://assets/character/idle/Idle_11.png<>uid://b3s8xjhcmjigy::::res://assets/character/idle/Idle_12.png<>uid://yvt8nc3youxx::::res://assets/character/idle/Idle_13.png<>uid://cuent661p5ni4::::res://assets/character/run/Run_00.png<>uid://bw0cbdh38h4dw::::res://assets/character/run/Run_01.png<>uid://clsh81yochfnc::::res://assets/character/run/Run_02.png<>uid://3fbgery6ilw::::res://assets/character/run/Run_03.png<>uid://jngk44b18yn4::::res://assets/character/run/Run_04.png<>uid://cwlv5jksx8u23::::res://assets/character/run/Run_05.png<>uid://crc8qwpsuuonk::::res://assets/character/run/Run_06.png<>uid://jkins23nlyxb::::res://assets/character/run/Run_07.png<>uid://eus53jkyrhbj::::res://assets/character/run/Run_08.png<>uid://bnjcw12t6apgp::::res://assets/character/run/Run_09.png
+World.tscn::PackedScene::8045444210507127964::1779222189::0::1::::<><><>0<>0<><>::uid://dcvt76g32muuk::::res://scenes/Player.tscn
 ::res://scripts/::1779219556

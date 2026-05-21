@@ -1,4 +1,8 @@
-res://scenes/main.tscn
 res://scenes/Player.tscn
-res://scenes/World.tscn
 res://scenes/Player.gd
+res://scenes/Ground_Block.tscn
+res://scenes/World.tscn
+res://scenes/Pickup.tscn
+res://scenes/Pickup.gd
+res://scenes/Bullet.tscn
+res://scenes/Bullet.gd
